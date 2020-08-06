@@ -82,5 +82,26 @@ namespace ED_Systems.Properties {
                 this["UseLocalBase"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50B2A7018F89EC075D8C61620465492C5B84FC6097C199484DB63ECDD593D03E")]
+        public string client_id {
+            get {
+                return ((string)(this["client_id"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string instance_id {
+            get {
+                return ((string)(this["instance_id"]));
+            }
+            set {
+                this["instance_id"] = value;
+            }
+        }
     }
 }

@@ -17,5 +17,11 @@
     <Setting Name="UseLocalBase" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="client_id" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">50B2A7018F89EC075D8C61620465492C5B84FC6097C199484DB63ECDD593D03E</Value>
+    </Setting>
+    <Setting Name="instance_id" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

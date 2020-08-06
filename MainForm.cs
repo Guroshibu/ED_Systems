@@ -18,7 +18,6 @@ namespace ED_Systems
 {
     public partial class MainForm : Form
     {
-
         //для подключения и работы с БД
         private SQLiteConnection dbConnect;
         private SQLiteCommand sqliteCmd;
@@ -2404,6 +2403,7 @@ namespace ED_Systems
                 SqliteUpdate(sqliteCmd);
             }
         }
+
         private void showImagesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DataTable dt;
@@ -2439,6 +2439,12 @@ namespace ED_Systems
                     SqliteDelete(sqliteCmd);
                 }
             }
+        }
+
+        private void donateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormDonate form = new FormDonate();
+            form.Show();
         }
     }
 }

@@ -111,11 +111,12 @@
             this.rbSignals = new System.Windows.Forms.RadioButton();
             this.rbRaw = new System.Windows.Forms.RadioButton();
             this.cmsPlanets = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cmsSignals = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addImageToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.showImagesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsSignals = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addImageToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.showImagesToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.donateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.pnlSystemInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spcSystemInfo)).BeginInit();
@@ -155,7 +156,8 @@
             this.resetSelectionToolStripMenuItem,
             this.showEmptySystemsToolStripMenuItem,
             this.deleteEmptySystemsToolStripMenuItem,
-            this.universalCartographicPricesToolStripMenuItem});
+            this.universalCartographicPricesToolStripMenuItem,
+            this.donateToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(984, 24);
@@ -951,14 +953,6 @@
             this.cmsPlanets.Name = "cmsPlanets";
             this.cmsPlanets.Size = new System.Drawing.Size(145, 48);
             // 
-            // cmsSignals
-            // 
-            this.cmsSignals.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addImageToolStripMenuItem2,
-            this.showImagesToolStripMenuItem2});
-            this.cmsSignals.Name = "cmsSignals";
-            this.cmsSignals.Size = new System.Drawing.Size(145, 48);
-            // 
             // addImageToolStripMenuItem1
             // 
             this.addImageToolStripMenuItem1.Name = "addImageToolStripMenuItem1";
@@ -971,6 +965,14 @@
             this.showImagesToolStripMenuItem1.Size = new System.Drawing.Size(144, 22);
             this.showImagesToolStripMenuItem1.Text = "Show images";
             // 
+            // cmsSignals
+            // 
+            this.cmsSignals.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addImageToolStripMenuItem2,
+            this.showImagesToolStripMenuItem2});
+            this.cmsSignals.Name = "cmsSignals";
+            this.cmsSignals.Size = new System.Drawing.Size(145, 48);
+            // 
             // addImageToolStripMenuItem2
             // 
             this.addImageToolStripMenuItem2.Name = "addImageToolStripMenuItem2";
@@ -982,6 +984,13 @@
             this.showImagesToolStripMenuItem2.Name = "showImagesToolStripMenuItem2";
             this.showImagesToolStripMenuItem2.Size = new System.Drawing.Size(144, 22);
             this.showImagesToolStripMenuItem2.Text = "Show images";
+            // 
+            // donateToolStripMenuItem
+            // 
+            this.donateToolStripMenuItem.Name = "donateToolStripMenuItem";
+            this.donateToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.donateToolStripMenuItem.Text = "Donate";
+            this.donateToolStripMenuItem.Click += new System.EventHandler(this.donateToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -1123,6 +1132,7 @@
         private System.Windows.Forms.ContextMenuStrip cmsSignals;
         private System.Windows.Forms.ToolStripMenuItem addImageToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem showImagesToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem donateToolStripMenuItem;
     }
 }
 

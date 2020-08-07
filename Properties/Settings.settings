@@ -23,5 +23,8 @@
     <Setting Name="instance_id" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="wallet" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">410011471859212</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

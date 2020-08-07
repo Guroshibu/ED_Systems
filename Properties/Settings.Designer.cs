@@ -103,5 +103,14 @@ namespace ED_Systems.Properties {
                 this["instance_id"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("410011471859212")]
+        public string wallet {
+            get {
+                return ((string)(this["wallet"]));
+            }
+        }
     }
 }

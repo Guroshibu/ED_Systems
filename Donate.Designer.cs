@@ -30,12 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDonate));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblResult = new System.Windows.Forms.Label();
+            this.btnDonate = new System.Windows.Forms.Button();
+            this.tbxAmount = new System.Windows.Forms.TextBox();
+            this.lblSumm = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
-            this.lblSumm = new System.Windows.Forms.Label();
-            this.tbxAmount = new System.Windows.Forms.TextBox();
-            this.btnDonate = new System.Windows.Forms.Button();
-            this.lblResult = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -52,6 +52,46 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(776, 41);
             this.panel1.TabIndex = 0;
+            // 
+            // lblResult
+            // 
+            this.lblResult.AutoSize = true;
+            this.lblResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblResult.Location = new System.Drawing.Point(259, 13);
+            this.lblResult.Name = "lblResult";
+            this.lblResult.Size = new System.Drawing.Size(50, 18);
+            this.lblResult.TabIndex = 3;
+            this.lblResult.Text = "Result";
+            // 
+            // btnDonate
+            // 
+            this.btnDonate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnDonate.Location = new System.Drawing.Point(178, 6);
+            this.btnDonate.Name = "btnDonate";
+            this.btnDonate.Size = new System.Drawing.Size(75, 32);
+            this.btnDonate.TabIndex = 2;
+            this.btnDonate.Text = "Donate";
+            this.btnDonate.UseVisualStyleBackColor = true;
+            this.btnDonate.Click += new System.EventHandler(this.btnDonate_Click);
+            // 
+            // tbxAmount
+            // 
+            this.tbxAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbxAmount.Location = new System.Drawing.Point(72, 10);
+            this.tbxAmount.Name = "tbxAmount";
+            this.tbxAmount.Size = new System.Drawing.Size(100, 24);
+            this.tbxAmount.TabIndex = 1;
+            this.tbxAmount.Text = "100";
+            // 
+            // lblSumm
+            // 
+            this.lblSumm.AutoSize = true;
+            this.lblSumm.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblSumm.Location = new System.Drawing.Point(3, 13);
+            this.lblSumm.Name = "lblSumm";
+            this.lblSumm.Size = new System.Drawing.Size(63, 18);
+            this.lblSumm.TabIndex = 0;
+            this.lblSumm.Text = "Amount:";
             // 
             // panel2
             // 
@@ -72,45 +112,6 @@
             this.webBrowser.Name = "webBrowser";
             this.webBrowser.Size = new System.Drawing.Size(776, 379);
             this.webBrowser.TabIndex = 0;
-            // 
-            // lblSumm
-            // 
-            this.lblSumm.AutoSize = true;
-            this.lblSumm.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblSumm.Location = new System.Drawing.Point(3, 13);
-            this.lblSumm.Name = "lblSumm";
-            this.lblSumm.Size = new System.Drawing.Size(63, 18);
-            this.lblSumm.TabIndex = 0;
-            this.lblSumm.Text = "Amount:";
-            // 
-            // tbxAmount
-            // 
-            this.tbxAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbxAmount.Location = new System.Drawing.Point(72, 10);
-            this.tbxAmount.Name = "tbxAmount";
-            this.tbxAmount.Size = new System.Drawing.Size(100, 24);
-            this.tbxAmount.TabIndex = 1;
-            this.tbxAmount.Text = "100";
-            // 
-            // btnDonate
-            // 
-            this.btnDonate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnDonate.Location = new System.Drawing.Point(178, 6);
-            this.btnDonate.Name = "btnDonate";
-            this.btnDonate.Size = new System.Drawing.Size(75, 32);
-            this.btnDonate.TabIndex = 2;
-            this.btnDonate.Text = "Donate";
-            this.btnDonate.UseVisualStyleBackColor = true;
-            // 
-            // lblResult
-            // 
-            this.lblResult.AutoSize = true;
-            this.lblResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblResult.Location = new System.Drawing.Point(259, 13);
-            this.lblResult.Name = "lblResult";
-            this.lblResult.Size = new System.Drawing.Size(50, 18);
-            this.lblResult.TabIndex = 3;
-            this.lblResult.Text = "Result";
             // 
             // FormDonate
             // 

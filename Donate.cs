@@ -70,7 +70,9 @@ namespace ED_Systems
             instance_id = Properties.Settings.Default.instance_id;
             wallet = Properties.Settings.Default.wallet;
 
-
+            //System.Uri url = new Uri(@"ms-appx-web:///html/Donate.html");
+            System.Uri url = new Uri("http://edspace.hostronavt.ru/index.php/donate");
+            webView.Navigate(url);
             //если неопределен то нужно получить
             //todo отключено для отладки 
             //if (instance_id == "") GetInstanceID();
@@ -130,7 +132,7 @@ namespace ED_Systems
             }
             else
             {
-                lblResult.Text = "Error: " + instansIdResponce.error;
+                //lblResult.Text = "Error: " + instansIdResponce.error;
             }
         }
         private void ProcessExternalPayment(string[] data, string requestId)
@@ -139,12 +141,12 @@ namespace ED_Systems
         }
         private void btnDonate_Click(object sender, EventArgs e)
         {
-            bool isNum = double.TryParse(tbxAmount.Text, out amount);
+            /*bool isNum = double.TryParse(tbxAmount.Text, out amount);
             if (!isNum)
             {
                 MessageBox.Show("Invalid amount");
                 return;
-            }
+            }*/
             //Создание платежа и проверка его параметров
             string[] data = new string[5];
             data[0] = "pattern_id=p2p";
@@ -173,7 +175,7 @@ namespace ED_Systems
                     if(processExternalPaymentResponce.status != "refused")
                     {
                         //ошибка
-                        lblResult.Text = "Error: " + processExternalPaymentResponce.error;
+                        //lblResult.Text = "Error: " + processExternalPaymentResponce.error;
                         return;
                     }
                     if (processExternalPaymentResponce.status != "in_progress")
@@ -190,7 +192,7 @@ namespace ED_Systems
             }
             else
             {
-                lblResult.Text = "Error: " + externalPaymentResponce.error;
+                //lblResult.Text = "Error: " + externalPaymentResponce.error;
             }
         }
     }

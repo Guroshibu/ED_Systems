@@ -57,7 +57,7 @@ namespace ED_Systems
         {
             try
             {
-                dbConnect = new SQLiteConnection("Data Source=data.db;Version=3;");
+                dbConnect = new SQLiteConnection(@"Data Source=Database\data.db;Version=3;");
                 dbConnect.Open();
                 sqliteCmd = new SQLiteCommand();
                 sqliteCmd.Connection = dbConnect;

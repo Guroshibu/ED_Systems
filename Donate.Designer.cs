@@ -29,89 +29,29 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDonate));
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.lblResult = new System.Windows.Forms.Label();
-            this.btnDonate = new System.Windows.Forms.Button();
-            this.tbxAmount = new System.Windows.Forms.TextBox();
-            this.lblSumm = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.webBrowser = new System.Windows.Forms.WebBrowser();
-            this.panel1.SuspendLayout();
+            this.webView = new Microsoft.Toolkit.Forms.UI.Controls.WebView();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.webView)).BeginInit();
             this.SuspendLayout();
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.lblResult);
-            this.panel1.Controls.Add(this.btnDonate);
-            this.panel1.Controls.Add(this.tbxAmount);
-            this.panel1.Controls.Add(this.lblSumm);
-            this.panel1.Location = new System.Drawing.Point(12, 12);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(776, 41);
-            this.panel1.TabIndex = 0;
-            // 
-            // lblResult
-            // 
-            this.lblResult.AutoSize = true;
-            this.lblResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblResult.Location = new System.Drawing.Point(259, 13);
-            this.lblResult.Name = "lblResult";
-            this.lblResult.Size = new System.Drawing.Size(50, 18);
-            this.lblResult.TabIndex = 3;
-            this.lblResult.Text = "Result";
-            // 
-            // btnDonate
-            // 
-            this.btnDonate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnDonate.Location = new System.Drawing.Point(178, 6);
-            this.btnDonate.Name = "btnDonate";
-            this.btnDonate.Size = new System.Drawing.Size(75, 32);
-            this.btnDonate.TabIndex = 2;
-            this.btnDonate.Text = "Donate";
-            this.btnDonate.UseVisualStyleBackColor = true;
-            this.btnDonate.Click += new System.EventHandler(this.btnDonate_Click);
-            // 
-            // tbxAmount
-            // 
-            this.tbxAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbxAmount.Location = new System.Drawing.Point(72, 10);
-            this.tbxAmount.Name = "tbxAmount";
-            this.tbxAmount.Size = new System.Drawing.Size(100, 24);
-            this.tbxAmount.TabIndex = 1;
-            this.tbxAmount.Text = "100";
-            // 
-            // lblSumm
-            // 
-            this.lblSumm.AutoSize = true;
-            this.lblSumm.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblSumm.Location = new System.Drawing.Point(3, 13);
-            this.lblSumm.Name = "lblSumm";
-            this.lblSumm.Size = new System.Drawing.Size(63, 18);
-            this.lblSumm.TabIndex = 0;
-            this.lblSumm.Text = "Amount:";
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.Controls.Add(this.webBrowser);
-            this.panel2.Location = new System.Drawing.Point(12, 59);
+            this.panel2.Controls.Add(this.webView);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(776, 379);
+            this.panel2.Size = new System.Drawing.Size(800, 450);
             this.panel2.TabIndex = 1;
             // 
-            // webBrowser
+            // webView
             // 
-            this.webBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowser.Location = new System.Drawing.Point(0, 0);
-            this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser.Name = "webBrowser";
-            this.webBrowser.Size = new System.Drawing.Size(776, 379);
-            this.webBrowser.TabIndex = 0;
+            this.webView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webView.Location = new System.Drawing.Point(0, 0);
+            this.webView.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webView.Name = "webView";
+            this.webView.Size = new System.Drawing.Size(800, 450);
+            this.webView.TabIndex = 0;
             // 
             // FormDonate
             // 
@@ -119,25 +59,19 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(816, 489);
             this.Name = "FormDonate";
             this.Text = "Donate";
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.webView)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label lblResult;
-        private System.Windows.Forms.Button btnDonate;
-        private System.Windows.Forms.TextBox tbxAmount;
-        private System.Windows.Forms.Label lblSumm;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.WebBrowser webBrowser;
+        private Microsoft.Toolkit.Forms.UI.Controls.WebView webView;
     }
 }

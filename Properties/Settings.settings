@@ -17,14 +17,17 @@
     <Setting Name="UseLocalBase" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="client_id" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">50B2A7018F89EC075D8C61620465492C5B84FC6097C199484DB63ECDD593D03E</Value>
+    <Setting Name="Host" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">195.133.196.118</Value>
     </Setting>
-    <Setting Name="instance_id" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="Db" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">edsys</Value>
     </Setting>
-    <Setting Name="wallet" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">410011471859212</Value>
+    <Setting Name="User" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">edcmdr</Value>
+    </Setting>
+    <Setting Name="Password" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">mjgawbTYk5YijYwR</Value>
     </Setting>
   </Settings>
 </SettingsFile>

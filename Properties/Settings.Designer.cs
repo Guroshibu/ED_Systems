@@ -85,31 +85,37 @@ namespace ED_Systems.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("50B2A7018F89EC075D8C61620465492C5B84FC6097C199484DB63ECDD593D03E")]
-        public string client_id {
+        [global::System.Configuration.DefaultSettingValueAttribute("195.133.196.118")]
+        public string Host {
             get {
-                return ((string)(this["client_id"]));
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string instance_id {
-            get {
-                return ((string)(this["instance_id"]));
-            }
-            set {
-                this["instance_id"] = value;
+                return ((string)(this["Host"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("410011471859212")]
-        public string wallet {
+        [global::System.Configuration.DefaultSettingValueAttribute("edsys")]
+        public string Db {
             get {
-                return ((string)(this["wallet"]));
+                return ((string)(this["Db"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("edcmdr")]
+        public string User {
+            get {
+                return ((string)(this["User"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("mjgawbTYk5YijYwR")]
+        public string Password {
+            get {
+                return ((string)(this["Password"]));
             }
         }
     }

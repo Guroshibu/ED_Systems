@@ -77,14 +77,12 @@ namespace ED_Systems
         }
         private void ConnectMySQL()
         {
-            string host = "195.133.196.118";
-            int port = 3306;
-            string db = "edsys";
-            string user = "edcmdr";
-            string pwd = "mjgawbTYk5YijYwR";
             // Connection String.
-            string connString = "Server=" + host + ";Database=" + db
-                + ";port=" + port + ";User Id=" + user + ";password=" + pwd;
+            string connString = "Server=" + Properties.Settings.Default.Host +
+                                ";Database=" + Properties.Settings.Default.Db +
+                                ";port=3306" + 
+                                ";User Id=" + Properties.Settings.Default.User +
+                                ";password=" + Properties.Settings.Default.Password;
             try
             {
                 mysqlConnect = new MySqlConnection(connString);
@@ -2443,8 +2441,7 @@ namespace ED_Systems
 
         private void donateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormDonate form = new FormDonate();
-            form.Show();
+            System.Diagnostics.Process.Start("http://edspace.hostronavt.ru/donate.html");
         }
     }
 }

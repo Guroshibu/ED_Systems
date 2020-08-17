@@ -41,6 +41,7 @@
             this.showEmptySystemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteEmptySystemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.universalCartographicPricesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.donateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblLogFolder = new System.Windows.Forms.Label();
             this.lblCurrentCoordinates = new System.Windows.Forms.Label();
             this.lblCurrentSystem = new System.Windows.Forms.Label();
@@ -116,7 +117,7 @@
             this.cmsSignals = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addImageToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.showImagesToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.donateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.setMaxDistanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.pnlSystemInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spcSystemInfo)).BeginInit();
@@ -213,6 +214,13 @@
             this.universalCartographicPricesToolStripMenuItem.Size = new System.Drawing.Size(173, 20);
             this.universalCartographicPricesToolStripMenuItem.Text = "Universal Cartographic prices";
             this.universalCartographicPricesToolStripMenuItem.Click += new System.EventHandler(this.universalCartographicPricesToolStripMenuItem_Click);
+            // 
+            // donateToolStripMenuItem
+            // 
+            this.donateToolStripMenuItem.Name = "donateToolStripMenuItem";
+            this.donateToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.donateToolStripMenuItem.Text = "Donate";
+            this.donateToolStripMenuItem.Click += new System.EventHandler(this.donateToolStripMenuItem_Click);
             // 
             // lblLogFolder
             // 
@@ -354,30 +362,31 @@
             this.tsmiSystemsCopy,
             this.getEDSMDataToolStripMenuItem,
             this.setAsCurrentToolStripMenuItem,
+            this.setMaxDistanceToolStripMenuItem,
             this.lastVisitToolStripMenuItem,
             this.addImageToolStripMenuItem,
             this.showImagesToolStripMenuItem});
             this.cmsSystemsCopy.Name = "cmsSystemsCopy";
-            this.cmsSystemsCopy.Size = new System.Drawing.Size(170, 136);
+            this.cmsSystemsCopy.Size = new System.Drawing.Size(181, 180);
             // 
             // tsmiSystemsCopy
             // 
             this.tsmiSystemsCopy.Name = "tsmiSystemsCopy";
-            this.tsmiSystemsCopy.Size = new System.Drawing.Size(169, 22);
+            this.tsmiSystemsCopy.Size = new System.Drawing.Size(180, 22);
             this.tsmiSystemsCopy.Text = "Copy to clipboard";
             this.tsmiSystemsCopy.Click += new System.EventHandler(this.tsmiSystemsCopy_Click);
             // 
             // getEDSMDataToolStripMenuItem
             // 
             this.getEDSMDataToolStripMenuItem.Name = "getEDSMDataToolStripMenuItem";
-            this.getEDSMDataToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.getEDSMDataToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.getEDSMDataToolStripMenuItem.Text = "Get EDSM data";
             this.getEDSMDataToolStripMenuItem.Click += new System.EventHandler(this.getEDSMDataToolStripMenuItem_Click);
             // 
             // setAsCurrentToolStripMenuItem
             // 
             this.setAsCurrentToolStripMenuItem.Name = "setAsCurrentToolStripMenuItem";
-            this.setAsCurrentToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.setAsCurrentToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.setAsCurrentToolStripMenuItem.Text = "Set as current";
             this.setAsCurrentToolStripMenuItem.Click += new System.EventHandler(this.setAsCurrentToolStripMenuItem_Click);
             // 
@@ -385,21 +394,21 @@
             // 
             this.lastVisitToolStripMenuItem.CheckOnClick = true;
             this.lastVisitToolStripMenuItem.Name = "lastVisitToolStripMenuItem";
-            this.lastVisitToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.lastVisitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.lastVisitToolStripMenuItem.Text = "Last visit";
             this.lastVisitToolStripMenuItem.CheckedChanged += new System.EventHandler(this.lastVisitToolStripMenuItem_CheckedChanged);
             // 
             // addImageToolStripMenuItem
             // 
             this.addImageToolStripMenuItem.Name = "addImageToolStripMenuItem";
-            this.addImageToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.addImageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.addImageToolStripMenuItem.Text = "Add image";
             this.addImageToolStripMenuItem.Click += new System.EventHandler(this.addImageToolStripMenuItem_Click);
             // 
             // showImagesToolStripMenuItem
             // 
             this.showImagesToolStripMenuItem.Name = "showImagesToolStripMenuItem";
-            this.showImagesToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.showImagesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.showImagesToolStripMenuItem.Text = "Show images";
             this.showImagesToolStripMenuItem.Click += new System.EventHandler(this.showImagesToolStripMenuItem_Click);
             // 
@@ -985,12 +994,12 @@
             this.showImagesToolStripMenuItem2.Size = new System.Drawing.Size(144, 22);
             this.showImagesToolStripMenuItem2.Text = "Show images";
             // 
-            // donateToolStripMenuItem
+            // setMaxDistanceToolStripMenuItem
             // 
-            this.donateToolStripMenuItem.Name = "donateToolStripMenuItem";
-            this.donateToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
-            this.donateToolStripMenuItem.Text = "Donate";
-            this.donateToolStripMenuItem.Click += new System.EventHandler(this.donateToolStripMenuItem_Click);
+            this.setMaxDistanceToolStripMenuItem.Name = "setMaxDistanceToolStripMenuItem";
+            this.setMaxDistanceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.setMaxDistanceToolStripMenuItem.Text = "Set max distance";
+            this.setMaxDistanceToolStripMenuItem.Click += new System.EventHandler(this.setMaxDistanceToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -1133,6 +1142,7 @@
         private System.Windows.Forms.ToolStripMenuItem addImageToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem showImagesToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem donateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem setMaxDistanceToolStripMenuItem;
     }
 }
 

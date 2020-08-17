@@ -57,7 +57,7 @@ namespace ED_Systems
         {
             try
             {
-                dbConnect = new SQLiteConnection(@"Data Source=Database\data.db;Version=3;");
+                dbConnect = new SQLiteConnection("Data Source=data.db;Version=3;");
                 dbConnect.Open();
                 sqliteCmd = new SQLiteCommand();
                 sqliteCmd.Connection = dbConnect;
@@ -78,32 +78,28 @@ namespace ED_Systems
         private void ConnectMySQL()
         {
             // Connection String.
-            string connString = "Server=" + Properties.Settings.Default.Host +
-                                ";Database=" + Properties.Settings.Default.Db +
-                                ";port=3306" + 
-                                ";User Id=" + Properties.Settings.Default.User +
-                                ";password=" + Properties.Settings.Default.Password;
+            string connString = "Server=" + Properties.Settings.Default.MySqlHost + 
+                                ";Database=" + Properties.Settings.Default.MySqlDb +
+                                ";port=" + Properties.Settings.Default.MySqlPort + 
+                                ";User Id=" + Properties.Settings.Default.MySqlUser + 
+                                ";password=" + Properties.Settings.Default.MySqlPwd;
             try
             {
                 mysqlConnect = new MySqlConnection(connString);
                 mysqlConnect.Open();
                 mysqlCmd = new MySqlCommand();
                 mysqlCmd.Connection = mysqlConnect;
+                if (Properties.Settings.Default.MaxDistanse > 1000)
+                {
+                    Properties.Settings.Default.MaxDistanse = 1000;
+                    Properties.Settings.Default.Save();
+                }
 
             }
             catch(Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
-                useLocalBase = true;
-                useLocalBaseToolStripMenuItem.Checked = useLocalBase;
-                if (useLocalBase)
-                {
-                    useLocalBaseToolStripMenuItem.BackColor = Color.LightGreen;
-                }
-                else
-                {
-                    useLocalBaseToolStripMenuItem.BackColor = SystemColors.ControlDark;
-                }
+                UseLocalBase();
                 Application.DoEvents();
             }
         }
@@ -191,6 +187,7 @@ namespace ED_Systems
             catch (MySqlException ex)
             {
                 MessageBox.Show("Error: " + ex.Message + "\r\n " + cmd.CommandText);
+                UseLocalBase();
             }
             return dt;
         }
@@ -203,6 +200,7 @@ namespace ED_Systems
             catch (MySqlException ex)
             {
                 MessageBox.Show("Error: " + ex.Message + "\r\n " + cmd.CommandText);
+                UseLocalBase();
             }
         }
         private void MySqlUpdate(MySqlCommand cmd)
@@ -214,6 +212,7 @@ namespace ED_Systems
             catch (MySqlException ex)
             {
                 MessageBox.Show("Error: " + ex.Message + "\r\n " + cmd.CommandText);
+                UseLocalBase();
             }
         }
         private void MySqlDelete(MySqlCommand cmd)
@@ -225,6 +224,7 @@ namespace ED_Systems
             catch (MySqlException ex)
             {
                 MessageBox.Show("Error: " + ex.Message + "\r\n " + cmd.CommandText);
+                UseLocalBase();
             }
         }
         private long MySqlCount(MySqlCommand cmd)
@@ -237,18 +237,27 @@ namespace ED_Systems
             catch (MySqlException ex)
             {
                 MessageBox.Show("Error: " + ex.Message + "\r\n " + cmd.CommandText);
+                UseLocalBase();
             }
             return Convert.ToInt64(count);
+        }
+        private void UseLocalBase()
+        {
+            useLocalBase = true;
+            useLocalBaseToolStripMenuItem.Checked = useLocalBase;
+            useLocalBaseToolStripMenuItem.BackColor = Color.LightGreen;
         }
         private void LoadSystems(string filter)
         {
             double dx;
             double dy;
             double dz;
+            double radius = Properties.Settings.Default.MaxDistanse;
 
             DataTable dt;
 
             loadingData = true;
+
 
             ConnectMySQL();
 
@@ -258,8 +267,15 @@ namespace ED_Systems
                 {
                     mysqlCmd.CommandText = @"SELECT DISTINCT t1.*
                                             FROM Systems t1, Materials t2
-                                            WHERE t1.SysAddr=t2.SysAddr AND t2.Name = @Name";
+                                            WHERE t1.SysAddr=t2.SysAddr AND t2.Name = @Name AND
+                                                  SQRT(POW((t1.StarPosX - @currX),2) + 
+                                                       POW((t1.StarPosY - @currY),2) +
+                                                       POW((t1.StarPosZ - @currZ),2)) < @radius";
                     mysqlCmd.Parameters.Clear();
+                    mysqlCmd.Parameters.Add("@currX", MySqlDbType.Double).Value = currX;
+                    mysqlCmd.Parameters.Add("@currY", MySqlDbType.Double).Value = currY;
+                    mysqlCmd.Parameters.Add("@currZ", MySqlDbType.Double).Value = currZ;
+                    mysqlCmd.Parameters.Add("@radius", MySqlDbType.Double).Value = radius;
                     mysqlCmd.Parameters.Add("@Name", MySqlDbType.String).Value = filter;
                     dtSystems = MySqlSelect(mysqlCmd);
                 }
@@ -267,8 +283,15 @@ namespace ED_Systems
                 {
                     sqliteCmd.CommandText = @"SELECT DISTINCT t1.*
                                             FROM Systems t1, Materials t2
-                                            WHERE t1.SysAddr=t2.SysAddr AND t2.Name = @Name";
+                                            WHERE t1.SysAddr=t2.SysAddr AND t2.Name = @Name AND
+                                                  (t1.StarPosX - @currX) * (t1.StarPosX - @currX) + 
+                                                  (t1.StarPosY - @currY) * (t1.StarPosY - @currY) +
+		                                          (t1.StarPosZ - @currZ) * (t1.StarPosZ - @currZ) < @radius * @radius";
                     sqliteCmd.Parameters.Clear();
+                    sqliteCmd.Parameters.Add("@currX", DbType.Double).Value = currX;
+                    sqliteCmd.Parameters.Add("@currY", DbType.Double).Value = currY;
+                    sqliteCmd.Parameters.Add("@currZ", DbType.Double).Value = currZ;
+                    sqliteCmd.Parameters.Add("@radius", DbType.Double).Value = radius;
                     sqliteCmd.Parameters.Add("@Name", DbType.String).Value = filter;
                     dtSystems = SqliteSelect(sqliteCmd);
                 }
@@ -279,7 +302,15 @@ namespace ED_Systems
                 {
                     mysqlCmd.CommandText = @"SELECT DISTINCT t1.*
                                             FROM Systems t1, Signals t2
-                                            WHERE t1.SysAddr=t2.SysAddr AND t2.Name = @Name";
+                                            WHERE t1.SysAddr=t2.SysAddr AND t2.Name = @Name AND
+                                                  SQRT(POW((t1.StarPosX - @currX),2) + 
+                                                       POW((t1.StarPosY - @currY),2) +
+                                                       POW((t1.StarPosZ - @currZ),2)) < @radius";
+                    mysqlCmd.Parameters.Clear();
+                    mysqlCmd.Parameters.Add("@currX", MySqlDbType.Double).Value = currX;
+                    mysqlCmd.Parameters.Add("@currY", MySqlDbType.Double).Value = currY;
+                    mysqlCmd.Parameters.Add("@currZ", MySqlDbType.Double).Value = currZ;
+                    mysqlCmd.Parameters.Add("@radius", MySqlDbType.Double).Value = radius;
                     mysqlCmd.Parameters.Add("@Name", MySqlDbType.String).Value = filter;
                     dtSystems = MySqlSelect(mysqlCmd);
                 }
@@ -287,7 +318,15 @@ namespace ED_Systems
                 {
                     sqliteCmd.CommandText = @"SELECT DISTINCT t1.*
                                             FROM Systems t1, Signals t2
-                                            WHERE t1.SysAddr=t2.SysAddr AND t2.Name = @Name";
+                                            WHERE t1.SysAddr=t2.SysAddr AND t2.Name = @Name AND
+                                                  (t1.StarPosX - @currX) * (t1.StarPosX - @currX) + 
+                                                  (t1.StarPosY - @currY) * (t1.StarPosY - @currY) +
+		                                          (t1.StarPosZ - @currZ) * (t1.StarPosZ - @currZ) < @radius * @radius";
+                    sqliteCmd.Parameters.Clear();
+                    sqliteCmd.Parameters.Add("@currX", DbType.Double).Value = currX;
+                    sqliteCmd.Parameters.Add("@currY", DbType.Double).Value = currY;
+                    sqliteCmd.Parameters.Add("@currZ", DbType.Double).Value = currZ;
+                    sqliteCmd.Parameters.Add("@radius", DbType.Double).Value = radius;
                     sqliteCmd.Parameters.Add("@Name", DbType.String).Value = filter;
                     dtSystems = SqliteSelect(sqliteCmd);
                 }
@@ -297,13 +336,30 @@ namespace ED_Systems
                 if (!useLocalBase)
                 {
                     mysqlCmd.CommandText = @"SELECT *
-                                            FROM Systems";
+                                            FROM Systems
+                                            WHERE SQRT(POW((StarPosX - @currX),2) + 
+                                                       POW((StarPosY - @currY),2) +
+                                                       POW((StarPosZ - @currZ),2)) < @radius";
+                    mysqlCmd.Parameters.Clear();
+                    mysqlCmd.Parameters.Add("@currX", MySqlDbType.Double).Value = currX;
+                    mysqlCmd.Parameters.Add("@currY", MySqlDbType.Double).Value = currY;
+                    mysqlCmd.Parameters.Add("@currZ", MySqlDbType.Double).Value = currZ;
+                    mysqlCmd.Parameters.Add("@radius", MySqlDbType.Double).Value = radius;
+
                     dtSystems = MySqlSelect(mysqlCmd);
                 }
                 else
                 {
                     sqliteCmd.CommandText = @"SELECT *
-                                            FROM Systems";
+                                            FROM Systems
+                                            WHERE (StarPosX - @currX) * (StarPosX - @currX) + 
+                                                  (StarPosY - @currY) * (StarPosY - @currY) +
+		                                          (StarPosZ - @currZ) * (StarPosZ - @currZ) < @radius * @radius";
+                    sqliteCmd.Parameters.Clear();
+                    sqliteCmd.Parameters.Add("@currX", DbType.Double).Value = currX;
+                    sqliteCmd.Parameters.Add("@currY", DbType.Double).Value = currY;
+                    sqliteCmd.Parameters.Add("@currZ", DbType.Double).Value = currZ;
+                    sqliteCmd.Parameters.Add("@radius", DbType.Double).Value = radius;
                     dtSystems = SqliteSelect(sqliteCmd);
                 }
             }
@@ -402,17 +458,18 @@ namespace ED_Systems
             dgvSystems.CurrentRow.Cells["sysDistance"].ReadOnly = true;
             dgvSystems.Update();
 
-            lblSystems.Text = "Systems (" + dtSystems.Rows.Count.ToString() + ")";
-            
+            lblSystems.Text = "Systems (" + dtSystems.Rows.Count.ToString() + "), Max distance " + radius.ToString() + " ly";
+            loadingData = false;
+
             LoadPlanets(Convert.ToUInt64(dgvSystems.CurrentRow.Cells["sysSystemAddress"].Value), filter);
             DisconnectMySQL();
 
-            loadingData = false;
+            
         }
         private void LoadPlanets(UInt64 sysAddr, string filter)
         {
             DataTable dt;
-
+            UInt64 planetID;
 
             if (filter != "" && rbRaw.Checked)
             {
@@ -436,7 +493,7 @@ namespace ED_Systems
                     sqliteCmd.CommandText = @"SELECT t1.*
                                             FROM Planets t1, Materials t2
                                             WHERE t1.SysAddr = @SysAddr AND
-                                                  t1.SysAddr =t 2.SysAddr AND
+                                                  t1.SysAddr = t2.SysAddr AND
                                                   t1.PlanetID = t2.PlanetID AND
                                                   t2.Name = @Name";
                     {
@@ -544,14 +601,24 @@ namespace ED_Systems
 
             lblPlanets.Text = "Planets (" + dtPlanets.Rows.Count.ToString() + ")";
 
-            if (dtPlanets.Rows.Count == 0) return;
+            if (dtPlanets.Rows.Count == 0)
+            {
+                sysAddr = 0;
+                planetID = 0;
+            }
+            else
+            {
+                sysAddr = Convert.ToUInt64(dgvPlanets.CurrentRow.Cells["plSystemAddress"].Value);
+                planetID = Convert.ToUInt64(dgvPlanets.CurrentRow.Cells["plPlanetID"].Value);
+            }
+            LoadMaterials(sysAddr, planetID);
+            LoadRings(sysAddr, planetID);
 
+            //LoadMaterials(Convert.ToUInt64(dgvPlanets.CurrentRow.Cells["plSystemAddress"].Value),
+            //              Convert.ToUInt64(dgvPlanets.CurrentRow.Cells["plPlanetID"].Value));
 
-            LoadMaterials(Convert.ToUInt64(dgvPlanets.CurrentRow.Cells["plSystemAddress"].Value),
-                          Convert.ToUInt64(dgvPlanets.CurrentRow.Cells["plPlanetID"].Value));
-
-            LoadRings(Convert.ToUInt64(dgvPlanets.CurrentRow.Cells["plSystemAddress"].Value),
-                      Convert.ToUInt64(dgvPlanets.CurrentRow.Cells["plPlanetID"].Value));
+            //LoadRings(Convert.ToUInt64(dgvPlanets.CurrentRow.Cells["plSystemAddress"].Value),
+            //          Convert.ToUInt64(dgvPlanets.CurrentRow.Cells["plPlanetID"].Value));
         }
         private void LoadMaterials(UInt64 sysAddr, UInt64 planetID)
         {
@@ -611,7 +678,7 @@ namespace ED_Systems
         }
         private void LoadRings(UInt64 sysAddr, UInt64 planetID)
         {
-
+            string ringName;
 
             if (!useLocalBase)
             {
@@ -642,12 +709,23 @@ namespace ED_Systems
             dgvRings.CurrentCell = dgvRings.Rows[0].Cells["rgRingName"];
             dgvRings.Update();
 
-            if (dtRings.Rows.Count == 0) return;
+            if (dtRings.Rows.Count == 0)
+            {
+                sysAddr = 0;
+                planetID = 0;
+                ringName = "";
+            }
+            else
+            {
+                sysAddr = Convert.ToUInt64(dgvRings.CurrentRow.Cells["rgSystemAddress"].Value);
+                planetID = Convert.ToUInt64(dgvRings.CurrentRow.Cells["rgPlanetID"].Value);
+                ringName = dgvRings.CurrentRow.Cells["rgRingName"].Value.ToString();
+            }
 
-
-            LoadSignals(Convert.ToUInt64(dgvRings.CurrentRow.Cells["rgSystemAddress"].Value),
-                        Convert.ToUInt64(dgvRings.CurrentRow.Cells["rgPlanetID"].Value),
-                        dgvRings.CurrentRow.Cells["rgRingName"].Value.ToString());
+            LoadSignals(sysAddr, planetID, ringName);
+            //LoadSignals(Convert.ToUInt64(dgvRings.CurrentRow.Cells["rgSystemAddress"].Value),
+            //            Convert.ToUInt64(dgvRings.CurrentRow.Cells["rgPlanetID"].Value),
+            //            dgvRings.CurrentRow.Cells["rgRingName"].Value.ToString());
         }
         private void LoadSignals(UInt64 sysAddr, UInt64 planetID, string ringName)
         {
@@ -672,13 +750,13 @@ namespace ED_Systems
                 sqliteCmd.CommandText = @"SELECT *
                                        FROM Signals
                                        WHERE SysAddr = @SysAddr AND
-                                             PlanetID = @PlanetID
+                                             PlanetID = @PlanetID AND
                                              RingName = @RingName";
                 sqliteCmd.Parameters.Clear();
                 sqliteCmd.Parameters.Add("@SysAddr", DbType.UInt64).Value = sysAddr;
                 sqliteCmd.Parameters.Add("@PlanetID", DbType.UInt64).Value = planetID;
                 sqliteCmd.Parameters.Add("@RingName", DbType.String).Value = ringName;
-                dtRings = SqliteSelect(sqliteCmd);
+                dtSignals = SqliteSelect(sqliteCmd);
             }
             //заполнение локальных данных
             column = new DataColumn
@@ -690,7 +768,7 @@ namespace ED_Systems
                 ReadOnly = false,
                 Unique = false
             };
-            dtRings.Columns.Add(column);
+            dtSignals.Columns.Add(column);
             column = new DataColumn
             {
                 DataType = System.Type.GetType("System.Int32"),
@@ -700,7 +778,7 @@ namespace ED_Systems
                 ReadOnly = false,
                 Unique = false
             };
-            dtRings.Columns.Add(column);
+            dtSignals.Columns.Add(column);
             column = new DataColumn
             {
                 DataType = System.Type.GetType("System.String"),
@@ -710,11 +788,11 @@ namespace ED_Systems
                 ReadOnly = false,
                 Unique = false
             };
-            dtRings.Columns.Add(column);
-            foreach (DataRow row in dtMaterials.Rows)
+            dtSignals.Columns.Add(column);
+            foreach (DataRow row in dtSignals.Rows)
             {
                 sqliteCmd.CommandText = @"SELECT *
-                                       FROM Signals
+                                       FROM SignalsLocal
                                        WHERE SysAddr = @SysAddr AND
                                              PlanetID = @PlanetID AND
                                              RingName = @RingName AND
@@ -2353,6 +2431,12 @@ namespace ED_Systems
             else
             {
                 useLocalBaseToolStripMenuItem.BackColor = SystemColors.ControlDark;
+                if(Properties.Settings.Default.MaxDistanse > 1000)
+                {
+                    Properties.Settings.Default.MaxDistanse = 1000;
+                    Properties.Settings.Default.Save();
+                    ApplyFilter();
+                }
             }
         }
 
@@ -2401,7 +2485,6 @@ namespace ED_Systems
                 SqliteUpdate(sqliteCmd);
             }
         }
-
         private void showImagesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DataTable dt;
@@ -2441,7 +2524,18 @@ namespace ED_Systems
 
         private void donateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("http://edspace.hostronavt.ru/donate.html");
+            System.Diagnostics.Process.Start(Properties.Settings.Default.DonateAddr);
+        }
+
+        private void setMaxDistanceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormMaxDistanse setDist = new FormMaxDistanse();
+            setDist.maxDist = Properties.Settings.Default.MaxDistanse;
+            setDist.useLocalBase = useLocalBase;
+            setDist.ShowDialog();
+            Properties.Settings.Default.MaxDistanse = Convert.ToDouble(setDist.maxDist);
+            Properties.Settings.Default.Save();
+            ApplyFilter();
         }
     }
 }

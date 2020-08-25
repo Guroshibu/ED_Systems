@@ -32,6 +32,29 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.useLocalBaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,6 +80,7 @@
             this.tsmiSystemsCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.getEDSMDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setAsCurrentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.setMaxDistanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lastVisitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showImagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,9 +100,13 @@
             this.plPlanetClass = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.plVolcanism = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.plLandable = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.plReserve = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.plBiological = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.plGeological = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.plReserve = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.plHuman = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.plGuardian = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.plThargoid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.plOther = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.plHasImg = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dgvRAW = new System.Windows.Forms.DataGridView();
@@ -117,7 +145,7 @@
             this.cmsSignals = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addImageToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.showImagesToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.setMaxDistanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tltLastLog = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip.SuspendLayout();
             this.pnlSystemInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spcSystemInfo)).BeginInit();
@@ -224,12 +252,15 @@
             // 
             // lblLogFolder
             // 
+            this.lblLogFolder.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblLogFolder.Location = new System.Drawing.Point(12, 24);
             this.lblLogFolder.Name = "lblLogFolder";
             this.lblLogFolder.Size = new System.Drawing.Size(648, 20);
             this.lblLogFolder.TabIndex = 1;
             this.lblLogFolder.Text = "label1";
             this.lblLogFolder.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.tltLastLog.SetToolTip(this.lblLogFolder, "Click to load last log");
+            this.lblLogFolder.Click += new System.EventHandler(this.lblLogFolder_Click);
             // 
             // lblCurrentCoordinates
             // 
@@ -351,6 +382,8 @@
             this.sysStarSystem.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.sysStarSystem.ContextMenuStrip = this.cmsSystemsCopy;
             this.sysStarSystem.DataPropertyName = "SystemName";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.sysStarSystem.DefaultCellStyle = dataGridViewCellStyle1;
             this.sysStarSystem.HeaderText = "Star system";
             this.sysStarSystem.Name = "sysStarSystem";
             this.sysStarSystem.ReadOnly = true;
@@ -367,48 +400,55 @@
             this.addImageToolStripMenuItem,
             this.showImagesToolStripMenuItem});
             this.cmsSystemsCopy.Name = "cmsSystemsCopy";
-            this.cmsSystemsCopy.Size = new System.Drawing.Size(181, 180);
+            this.cmsSystemsCopy.Size = new System.Drawing.Size(170, 158);
             // 
             // tsmiSystemsCopy
             // 
             this.tsmiSystemsCopy.Name = "tsmiSystemsCopy";
-            this.tsmiSystemsCopy.Size = new System.Drawing.Size(180, 22);
+            this.tsmiSystemsCopy.Size = new System.Drawing.Size(169, 22);
             this.tsmiSystemsCopy.Text = "Copy to clipboard";
             this.tsmiSystemsCopy.Click += new System.EventHandler(this.tsmiSystemsCopy_Click);
             // 
             // getEDSMDataToolStripMenuItem
             // 
             this.getEDSMDataToolStripMenuItem.Name = "getEDSMDataToolStripMenuItem";
-            this.getEDSMDataToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.getEDSMDataToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.getEDSMDataToolStripMenuItem.Text = "Get EDSM data";
             this.getEDSMDataToolStripMenuItem.Click += new System.EventHandler(this.getEDSMDataToolStripMenuItem_Click);
             // 
             // setAsCurrentToolStripMenuItem
             // 
             this.setAsCurrentToolStripMenuItem.Name = "setAsCurrentToolStripMenuItem";
-            this.setAsCurrentToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.setAsCurrentToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.setAsCurrentToolStripMenuItem.Text = "Set as current";
             this.setAsCurrentToolStripMenuItem.Click += new System.EventHandler(this.setAsCurrentToolStripMenuItem_Click);
+            // 
+            // setMaxDistanceToolStripMenuItem
+            // 
+            this.setMaxDistanceToolStripMenuItem.Name = "setMaxDistanceToolStripMenuItem";
+            this.setMaxDistanceToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.setMaxDistanceToolStripMenuItem.Text = "Set max distance";
+            this.setMaxDistanceToolStripMenuItem.Click += new System.EventHandler(this.setMaxDistanceToolStripMenuItem_Click);
             // 
             // lastVisitToolStripMenuItem
             // 
             this.lastVisitToolStripMenuItem.CheckOnClick = true;
             this.lastVisitToolStripMenuItem.Name = "lastVisitToolStripMenuItem";
-            this.lastVisitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.lastVisitToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.lastVisitToolStripMenuItem.Text = "Last visit";
             this.lastVisitToolStripMenuItem.CheckedChanged += new System.EventHandler(this.lastVisitToolStripMenuItem_CheckedChanged);
             // 
             // addImageToolStripMenuItem
             // 
             this.addImageToolStripMenuItem.Name = "addImageToolStripMenuItem";
-            this.addImageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addImageToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.addImageToolStripMenuItem.Text = "Add image";
             this.addImageToolStripMenuItem.Click += new System.EventHandler(this.addImageToolStripMenuItem_Click);
             // 
             // showImagesToolStripMenuItem
             // 
             this.showImagesToolStripMenuItem.Name = "showImagesToolStripMenuItem";
-            this.showImagesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.showImagesToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.showImagesToolStripMenuItem.Text = "Show images";
             this.showImagesToolStripMenuItem.Click += new System.EventHandler(this.showImagesToolStripMenuItem_Click);
             // 
@@ -440,9 +480,10 @@
             // 
             this.sysDistance.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.sysDistance.DataPropertyName = "Distance";
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.sysDistance.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.sysDistance.DefaultCellStyle = dataGridViewCellStyle2;
             this.sysDistance.HeaderText = "Distance (ly)";
             this.sysDistance.Name = "sysDistance";
             this.sysDistance.ReadOnly = true;
@@ -452,6 +493,8 @@
             // 
             this.sysHasImg.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.sysHasImg.DataPropertyName = "HasImg";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.sysHasImg.DefaultCellStyle = dataGridViewCellStyle3;
             this.sysHasImg.HeaderText = "Img";
             this.sysHasImg.Name = "sysHasImg";
             this.sysHasImg.ReadOnly = true;
@@ -461,6 +504,9 @@
             // sysComment
             // 
             this.sysComment.DataPropertyName = "Comment";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.sysComment.DefaultCellStyle = dataGridViewCellStyle4;
             this.sysComment.HeaderText = "Comment";
             this.sysComment.Name = "sysComment";
             // 
@@ -511,9 +557,13 @@
             this.plPlanetClass,
             this.plVolcanism,
             this.plLandable,
+            this.plReserve,
             this.plBiological,
             this.plGeological,
-            this.plReserve,
+            this.plHuman,
+            this.plGuardian,
+            this.plThargoid,
+            this.plOther,
             this.plHasImg});
             this.dgvPlanets.Location = new System.Drawing.Point(0, 25);
             this.dgvPlanets.Name = "dgvPlanets";
@@ -541,6 +591,8 @@
             // 
             this.plPlanetName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.plPlanetName.DataPropertyName = "PlanetName";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.plPlanetName.DefaultCellStyle = dataGridViewCellStyle5;
             this.plPlanetName.HeaderText = "Planet";
             this.plPlanetName.Name = "plPlanetName";
             this.plPlanetName.ReadOnly = true;
@@ -550,9 +602,10 @@
             // 
             this.plDistance.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.plDistance.DataPropertyName = "Distance";
-            dataGridViewCellStyle2.Format = "N0";
-            dataGridViewCellStyle2.NullValue = null;
-            this.plDistance.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.Format = "N0";
+            dataGridViewCellStyle6.NullValue = null;
+            this.plDistance.DefaultCellStyle = dataGridViewCellStyle6;
             this.plDistance.HeaderText = "Distance (ls)";
             this.plDistance.Name = "plDistance";
             this.plDistance.ReadOnly = true;
@@ -562,6 +615,8 @@
             // 
             this.plPlanetClass.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.plPlanetClass.DataPropertyName = "Class";
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.plPlanetClass.DefaultCellStyle = dataGridViewCellStyle7;
             this.plPlanetClass.HeaderText = "Planet class";
             this.plPlanetClass.Name = "plPlanetClass";
             this.plPlanetClass.ReadOnly = true;
@@ -571,6 +626,8 @@
             // 
             this.plVolcanism.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.plVolcanism.DataPropertyName = "Volcanism";
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.plVolcanism.DefaultCellStyle = dataGridViewCellStyle8;
             this.plVolcanism.HeaderText = "Volcanism";
             this.plVolcanism.Name = "plVolcanism";
             this.plVolcanism.ReadOnly = true;
@@ -587,35 +644,87 @@
             this.plLandable.TrueValue = "1";
             this.plLandable.Width = 57;
             // 
+            // plReserve
+            // 
+            this.plReserve.DataPropertyName = "Reserve";
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.plReserve.DefaultCellStyle = dataGridViewCellStyle9;
+            this.plReserve.HeaderText = "Reserve";
+            this.plReserve.Name = "plReserve";
+            this.plReserve.ReadOnly = true;
+            // 
             // plBiological
             // 
             this.plBiological.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.plBiological.DataPropertyName = "Biological";
-            this.plBiological.HeaderText = "Biological";
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.plBiological.DefaultCellStyle = dataGridViewCellStyle10;
+            this.plBiological.HeaderText = "Bio";
             this.plBiological.Name = "plBiological";
             this.plBiological.ReadOnly = true;
-            this.plBiological.Width = 77;
+            this.plBiological.Width = 47;
             // 
             // plGeological
             // 
             this.plGeological.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.plGeological.DataPropertyName = "Geological";
-            this.plGeological.HeaderText = "Geological";
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.plGeological.DefaultCellStyle = dataGridViewCellStyle11;
+            this.plGeological.HeaderText = "Geo";
             this.plGeological.Name = "plGeological";
             this.plGeological.ReadOnly = true;
-            this.plGeological.Width = 82;
+            this.plGeological.Width = 52;
             // 
-            // plReserve
+            // plHuman
             // 
-            this.plReserve.DataPropertyName = "Reserve";
-            this.plReserve.HeaderText = "Reserve";
-            this.plReserve.Name = "plReserve";
-            this.plReserve.ReadOnly = true;
+            this.plHuman.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.plHuman.DataPropertyName = "Human";
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.plHuman.DefaultCellStyle = dataGridViewCellStyle12;
+            this.plHuman.HeaderText = "Human";
+            this.plHuman.Name = "plHuman";
+            this.plHuman.ReadOnly = true;
+            this.plHuman.Width = 66;
+            // 
+            // plGuardian
+            // 
+            this.plGuardian.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.plGuardian.DataPropertyName = "Guardian";
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.plGuardian.DefaultCellStyle = dataGridViewCellStyle13;
+            this.plGuardian.HeaderText = "Guardian";
+            this.plGuardian.Name = "plGuardian";
+            this.plGuardian.ReadOnly = true;
+            this.plGuardian.Width = 75;
+            // 
+            // plThargoid
+            // 
+            this.plThargoid.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.plThargoid.DataPropertyName = "Thargoid";
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.plThargoid.DefaultCellStyle = dataGridViewCellStyle14;
+            this.plThargoid.HeaderText = "Thargoid";
+            this.plThargoid.Name = "plThargoid";
+            this.plThargoid.ReadOnly = true;
+            this.plThargoid.Width = 74;
+            // 
+            // plOther
+            // 
+            this.plOther.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.plOther.DataPropertyName = "Other";
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.plOther.DefaultCellStyle = dataGridViewCellStyle15;
+            this.plOther.HeaderText = "Other";
+            this.plOther.Name = "plOther";
+            this.plOther.ReadOnly = true;
+            this.plOther.Width = 58;
             // 
             // plHasImg
             // 
             this.plHasImg.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.plHasImg.DataPropertyName = "HasImg";
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.plHasImg.DefaultCellStyle = dataGridViewCellStyle16;
             this.plHasImg.HeaderText = "Img";
             this.plHasImg.Name = "plHasImg";
             this.plHasImg.ReadOnly = true;
@@ -679,6 +788,8 @@
             // rawName
             // 
             this.rawName.DataPropertyName = "Name";
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.rawName.DefaultCellStyle = dataGridViewCellStyle17;
             this.rawName.HeaderText = "Name (en)";
             this.rawName.Name = "rawName";
             this.rawName.ReadOnly = true;
@@ -686,6 +797,8 @@
             // rawNameLocalised
             // 
             this.rawNameLocalised.DataPropertyName = "NameLocalised";
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.rawNameLocalised.DefaultCellStyle = dataGridViewCellStyle18;
             this.rawNameLocalised.HeaderText = "Name (loc)";
             this.rawNameLocalised.Name = "rawNameLocalised";
             this.rawNameLocalised.ReadOnly = true;
@@ -693,9 +806,10 @@
             // rawPercent
             // 
             this.rawPercent.DataPropertyName = "Percent";
-            dataGridViewCellStyle3.Format = "N1";
-            dataGridViewCellStyle3.NullValue = null;
-            this.rawPercent.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle19.Format = "N1";
+            dataGridViewCellStyle19.NullValue = null;
+            this.rawPercent.DefaultCellStyle = dataGridViewCellStyle19;
             this.rawPercent.HeaderText = "Percent";
             this.rawPercent.Name = "rawPercent";
             this.rawPercent.ReadOnly = true;
@@ -768,6 +882,8 @@
             // rgRingName
             // 
             this.rgRingName.DataPropertyName = "RingName";
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.rgRingName.DefaultCellStyle = dataGridViewCellStyle20;
             this.rgRingName.HeaderText = "Ring";
             this.rgRingName.Name = "rgRingName";
             this.rgRingName.ReadOnly = true;
@@ -775,6 +891,8 @@
             // rgClass
             // 
             this.rgClass.DataPropertyName = "Class";
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.rgClass.DefaultCellStyle = dataGridViewCellStyle21;
             this.rgClass.HeaderText = "Class";
             this.rgClass.Name = "rgClass";
             this.rgClass.ReadOnly = true;
@@ -850,13 +968,17 @@
             // sigType
             // 
             this.sigType.DataPropertyName = "Type";
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.sigType.DefaultCellStyle = dataGridViewCellStyle22;
             this.sigType.HeaderText = "Type (en)";
             this.sigType.Name = "sigType";
             this.sigType.ReadOnly = true;
             // 
             // sigTypeLocalised
             // 
-            this.sigTypeLocalised.DataPropertyName = "TypeLocalised";
+            this.sigTypeLocalised.DataPropertyName = "NameLocalised";
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.sigTypeLocalised.DefaultCellStyle = dataGridViewCellStyle23;
             this.sigTypeLocalised.HeaderText = "Type (loc)";
             this.sigTypeLocalised.Name = "sigTypeLocalised";
             this.sigTypeLocalised.ReadOnly = true;
@@ -864,6 +986,8 @@
             // sigCount
             // 
             this.sigCount.DataPropertyName = "Count";
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.sigCount.DefaultCellStyle = dataGridViewCellStyle24;
             this.sigCount.HeaderText = "Count";
             this.sigCount.Name = "sigCount";
             this.sigCount.ReadOnly = true;
@@ -871,6 +995,9 @@
             // sigComment
             // 
             this.sigComment.DataPropertyName = "Comment";
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.sigComment.DefaultCellStyle = dataGridViewCellStyle25;
             this.sigComment.HeaderText = "Comment";
             this.sigComment.Name = "sigComment";
             // 
@@ -878,6 +1005,8 @@
             // 
             this.sigHasImg.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.sigHasImg.DataPropertyName = "HasImg";
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.sigHasImg.DefaultCellStyle = dataGridViewCellStyle26;
             this.sigHasImg.HeaderText = "Img";
             this.sigHasImg.Name = "sigHasImg";
             this.sigHasImg.ReadOnly = true;
@@ -891,7 +1020,7 @@
             this.cbxFilter.FormattingEnabled = true;
             this.cbxFilter.Location = new System.Drawing.Point(612, 54);
             this.cbxFilter.Name = "cbxFilter";
-            this.cbxFilter.Size = new System.Drawing.Size(294, 24);
+            this.cbxFilter.Size = new System.Drawing.Size(360, 24);
             this.cbxFilter.Sorted = true;
             this.cbxFilter.TabIndex = 8;
             this.cbxFilter.SelectedIndexChanged += new System.EventHandler(this.cbxFilter_SelectedIndexChanged);
@@ -994,13 +1123,6 @@
             this.showImagesToolStripMenuItem2.Size = new System.Drawing.Size(144, 22);
             this.showImagesToolStripMenuItem2.Text = "Show images";
             // 
-            // setMaxDistanceToolStripMenuItem
-            // 
-            this.setMaxDistanceToolStripMenuItem.Name = "setMaxDistanceToolStripMenuItem";
-            this.setMaxDistanceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.setMaxDistanceToolStripMenuItem.Text = "Set max distance";
-            this.setMaxDistanceToolStripMenuItem.Click += new System.EventHandler(this.setMaxDistanceToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1098,23 +1220,14 @@
         private System.Windows.Forms.ToolStripMenuItem showImagesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem universalCartographicPricesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem useLocalBaseToolStripMenuItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn rawSystemAddress;
-        private System.Windows.Forms.DataGridViewTextBoxColumn rawPlanetID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn rawName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn rawNameLocalised;
-        private System.Windows.Forms.DataGridViewTextBoxColumn rawPercent;
-        private System.Windows.Forms.DataGridViewTextBoxColumn rgSystemAddress;
-        private System.Windows.Forms.DataGridViewTextBoxColumn rgPlanetID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn rgRingName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn rgClass;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sigSystemAddress;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sigPlanetID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sigRing;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sigType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sigTypeLocalised;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sigCount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sigComment;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sigHasImg;
+        private System.Windows.Forms.ContextMenuStrip cmsPlanets;
+        private System.Windows.Forms.ToolStripMenuItem addImageToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem showImagesToolStripMenuItem1;
+        private System.Windows.Forms.ContextMenuStrip cmsSignals;
+        private System.Windows.Forms.ToolStripMenuItem addImageToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem showImagesToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem donateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem setMaxDistanceToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn sysSystemAddress;
         private System.Windows.Forms.DataGridViewTextBoxColumn sysLastVisit;
         private System.Windows.Forms.DataGridViewTextBoxColumn sysStarSystem;
@@ -1124,6 +1237,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn sysDistance;
         private System.Windows.Forms.DataGridViewTextBoxColumn sysHasImg;
         private System.Windows.Forms.DataGridViewTextBoxColumn sysComment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rawSystemAddress;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rawPlanetID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rawName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rawNameLocalised;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rawPercent;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rgSystemAddress;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rgPlanetID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rgRingName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rgClass;
         private System.Windows.Forms.DataGridViewTextBoxColumn plSystemAddress;
         private System.Windows.Forms.DataGridViewTextBoxColumn plPlanetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn plPlanetName;
@@ -1131,18 +1253,23 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn plPlanetClass;
         private System.Windows.Forms.DataGridViewTextBoxColumn plVolcanism;
         private System.Windows.Forms.DataGridViewCheckBoxColumn plLandable;
+        private System.Windows.Forms.DataGridViewTextBoxColumn plReserve;
         private System.Windows.Forms.DataGridViewTextBoxColumn plBiological;
         private System.Windows.Forms.DataGridViewTextBoxColumn plGeological;
-        private System.Windows.Forms.DataGridViewTextBoxColumn plReserve;
+        private System.Windows.Forms.DataGridViewTextBoxColumn plHuman;
+        private System.Windows.Forms.DataGridViewTextBoxColumn plGuardian;
+        private System.Windows.Forms.DataGridViewTextBoxColumn plThargoid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn plOther;
         private System.Windows.Forms.DataGridViewTextBoxColumn plHasImg;
-        private System.Windows.Forms.ContextMenuStrip cmsPlanets;
-        private System.Windows.Forms.ToolStripMenuItem addImageToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem showImagesToolStripMenuItem1;
-        private System.Windows.Forms.ContextMenuStrip cmsSignals;
-        private System.Windows.Forms.ToolStripMenuItem addImageToolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem showImagesToolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem donateToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem setMaxDistanceToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sigSystemAddress;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sigPlanetID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sigRing;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sigType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sigTypeLocalised;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sigCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sigComment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sigHasImg;
+        private System.Windows.Forms.ToolTip tltLastLog;
     }
 }
 

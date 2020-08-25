@@ -64,7 +64,7 @@ namespace ED_Systems
             }
             catch (SQLiteException ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show("SQLite Error:\r\n" + ex.Message);
             }
         }
         private void DisconnectDB()
@@ -98,7 +98,7 @@ namespace ED_Systems
             }
             catch(Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show("MySQL Error:\r\n" + ex.Message);
                 UseLocalBase();
                 Application.DoEvents();
             }
@@ -124,7 +124,7 @@ namespace ED_Systems
             }
             catch (SQLiteException ex)
             {
-                MessageBox.Show("Error: " + ex.Message + "\r\n " + cmd.CommandText);
+                MessageBox.Show("SQLite Error:\r\n" + ex.Message + "\r\n " + cmd.CommandText);
             }
             return dt;
         }
@@ -136,7 +136,7 @@ namespace ED_Systems
             }
             catch (SQLiteException ex)
             {
-                MessageBox.Show("Error: " + ex.Message + "\r\n " + cmd.CommandText);
+                MessageBox.Show("SQLite Error:\r\n" + ex.Message + "\r\n " + cmd.CommandText);
             }
         }
         private void SqliteUpdate(SQLiteCommand cmd)
@@ -147,7 +147,7 @@ namespace ED_Systems
             }
             catch (SQLiteException ex)
             {
-                MessageBox.Show("Error: " + ex.Message + "\r\n " + cmd.CommandText);
+                MessageBox.Show("SQLite Error:\r\n" + ex.Message + "\r\n " + cmd.CommandText);
             }
         }
         private void SqliteDelete(SQLiteCommand cmd)
@@ -158,7 +158,7 @@ namespace ED_Systems
             }
             catch (SQLiteException ex)
             {
-                MessageBox.Show("Error: " + ex.Message + "\r\n " + cmd.CommandText);
+                MessageBox.Show("SQLite Error:\r\n" + ex.Message + "\r\n " + cmd.CommandText);
             }
         }
         private long SqliteCount(SQLiteCommand cmd)
@@ -170,7 +170,7 @@ namespace ED_Systems
             }
             catch (SQLiteException ex)
             {
-                MessageBox.Show("Error: " + ex.Message + "\r\n " + cmd.CommandText);
+                MessageBox.Show("SQLite Error:\r\n" + ex.Message + "\r\n " + cmd.CommandText);
             }
             return Convert.ToInt64(count);
         }
@@ -199,7 +199,7 @@ namespace ED_Systems
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show("Error: " + ex.Message + "\r\n " + cmd.CommandText);
+                MessageBox.Show("MySQL Error:\r\n" + ex.Message + "\r\n " + cmd.CommandText);
                 UseLocalBase();
             }
         }
@@ -211,7 +211,7 @@ namespace ED_Systems
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show("Error: " + ex.Message + "\r\n " + cmd.CommandText);
+                MessageBox.Show("MySQL Error:\r\n" + ex.Message + "\r\n " + cmd.CommandText);
                 UseLocalBase();
             }
         }
@@ -223,7 +223,7 @@ namespace ED_Systems
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show("Error: " + ex.Message + "\r\n " + cmd.CommandText);
+                MessageBox.Show("MySQL Error:\r\n" + ex.Message + "\r\n " + cmd.CommandText);
                 UseLocalBase();
             }
         }
@@ -236,7 +236,7 @@ namespace ED_Systems
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show("Error: " + ex.Message + "\r\n " + cmd.CommandText);
+                MessageBox.Show("MySQL Error:\r\n" + ex.Message + "\r\n " + cmd.CommandText);
                 UseLocalBase();
             }
             return Convert.ToInt64(count);
@@ -302,7 +302,7 @@ namespace ED_Systems
                 {
                     mysqlCmd.CommandText = @"SELECT DISTINCT t1.*
                                             FROM Systems t1, Signals t2
-                                            WHERE t1.SysAddr=t2.SysAddr AND t2.Name = @Name AND
+                                            WHERE t1.SysAddr=t2.SysAddr AND t2.Type = @Type AND
                                                   SQRT(POW((t1.StarPosX - @currX),2) + 
                                                        POW((t1.StarPosY - @currY),2) +
                                                        POW((t1.StarPosZ - @currZ),2)) < @radius";
@@ -311,14 +311,14 @@ namespace ED_Systems
                     mysqlCmd.Parameters.Add("@currY", MySqlDbType.Double).Value = currY;
                     mysqlCmd.Parameters.Add("@currZ", MySqlDbType.Double).Value = currZ;
                     mysqlCmd.Parameters.Add("@radius", MySqlDbType.Double).Value = radius;
-                    mysqlCmd.Parameters.Add("@Name", MySqlDbType.String).Value = filter;
+                    mysqlCmd.Parameters.Add("@Type", MySqlDbType.String).Value = filter;
                     dtSystems = MySqlSelect(mysqlCmd);
                 }
                 else
                 {
                     sqliteCmd.CommandText = @"SELECT DISTINCT t1.*
                                             FROM Systems t1, Signals t2
-                                            WHERE t1.SysAddr=t2.SysAddr AND t2.Name = @Name AND
+                                            WHERE t1.SysAddr=t2.SysAddr AND t2.Type = @Type AND
                                                   (t1.StarPosX - @currX) * (t1.StarPosX - @currX) + 
                                                   (t1.StarPosY - @currY) * (t1.StarPosY - @currY) +
 		                                          (t1.StarPosZ - @currZ) * (t1.StarPosZ - @currZ) < @radius * @radius";
@@ -327,7 +327,7 @@ namespace ED_Systems
                     sqliteCmd.Parameters.Add("@currY", DbType.Double).Value = currY;
                     sqliteCmd.Parameters.Add("@currZ", DbType.Double).Value = currZ;
                     sqliteCmd.Parameters.Add("@radius", DbType.Double).Value = radius;
-                    sqliteCmd.Parameters.Add("@Name", DbType.String).Value = filter;
+                    sqliteCmd.Parameters.Add("@Type", DbType.String).Value = filter;
                     dtSystems = SqliteSelect(sqliteCmd);
                 }
             }
@@ -513,11 +513,11 @@ namespace ED_Systems
                                             WHERE t1.SysAddr = @SysAddr AND
                                                   t1.SysAddr = t2.SysAddr AND
                                                   t1.PlanetID = t2.PlanetID AND
-                                                  t2.Name = @Name";
+                                                  t2.Type = @Type";
                     {
                         mysqlCmd.Parameters.Clear();
                         mysqlCmd.Parameters.Add("@SysAddr", MySqlDbType.UInt64).Value = sysAddr;
-                        mysqlCmd.Parameters.Add("@Name", MySqlDbType.String).Value = filter;
+                        mysqlCmd.Parameters.Add("@Type", MySqlDbType.String).Value = filter;
                     }
                     dtPlanets = MySqlSelect(mysqlCmd);
                 }
@@ -528,11 +528,11 @@ namespace ED_Systems
                                             WHERE t1.SysAddr = @SysAddr AND
                                                   t1.SysAddr = t2.SysAddr AND
                                                   t1.PlanetID = t2.PlanetID AND
-                                                  t2.Name = @Name";
+                                                  t2.Type = @Type";
                     {
                         sqliteCmd.Parameters.Clear();
                         sqliteCmd.Parameters.Add("@SysAddr", DbType.UInt64).Value = sysAddr;
-                        sqliteCmd.Parameters.Add("@Name", DbType.String).Value = filter;
+                        sqliteCmd.Parameters.Add("@Type", DbType.String).Value = filter;
                     }
                     dtPlanets = SqliteSelect(sqliteCmd);
                 }
@@ -731,6 +731,7 @@ namespace ED_Systems
         {
             DataTable dt;
 
+            ringName = ringName.Trim();
 
             if (!useLocalBase)
             {
@@ -810,7 +811,7 @@ namespace ED_Systems
                                        FROM Localise
                                        WHERE Name = @Name";
                 sqliteCmd.Parameters.Clear();
-                sqliteCmd.Parameters.Add("@Name", DbType.String).Value = row["Name"].ToString();
+                sqliteCmd.Parameters.Add("@Name", DbType.String).Value = row["Type"].ToString();
                 dt = SqliteSelect(sqliteCmd);
                 row["NameLocalised"] = dt.Rows[0]["NameLocalised"].ToString();
 
@@ -825,6 +826,7 @@ namespace ED_Systems
         private void GetLogData(string path)
         {
             FSDJump fsdJump = new FSDJump();
+            CarrierJump carrierJump = new CarrierJump();
             Scan scan = new Scan();
             SAASignalsFound saaSignals = new SAASignalsFound();
 
@@ -840,6 +842,8 @@ namespace ED_Systems
             int linesCount;
 
             string[] fileLines;
+
+            if (!File.Exists(path)) return;
 
             fileLines = System.IO.File.ReadAllLines(path);
             linesCount = fileLines.Length;
@@ -941,6 +945,95 @@ namespace ED_Systems
                     sqliteCmd.Parameters.Add("@rowid", DbType.Int32).Value = 1;
                     SqliteUpdate(sqliteCmd);
                 }
+                // "event":"CarrierJump"
+                if (line.IndexOf("\"event\":\"CarrierJump\"") >= 0)
+                {
+                    carrierJump = JsonConvert.DeserializeObject<CarrierJump>(line);
+
+                    //удаленная база
+                    if (!useLocalBase)
+                    {
+                        mysqlCmd.CommandText = @"SELECT COUNT(*)
+                                                 FROM Systems
+                                                 WHERE SysAddr = @SysAddr";
+                        mysqlCmd.Parameters.Clear();
+                        mysqlCmd.Parameters.Add("@SysAddr", MySqlDbType.UInt64).Value = carrierJump.SystemAddress;
+
+                        if (MySqlCount(mysqlCmd) == 0)
+                        {
+                            //если не найден добавляем
+                            mysqlCmd.CommandText = @"INSERT INTO Systems (SysAddr, SystemName, StarPosX, StarPosY, StarPosZ)
+                                                    VALUES (@SysAddr, @SystemName, @StarPosX, @StarPosY, @StarPosZ)";
+                            mysqlCmd.Parameters.Clear();
+                            mysqlCmd.Parameters.Add("@SysAddr", MySqlDbType.UInt64).Value = carrierJump.SystemAddress;
+                            mysqlCmd.Parameters.Add("@SystemName", MySqlDbType.String).Value = carrierJump.StarSystem;
+                            mysqlCmd.Parameters.Add("@StarPosX", MySqlDbType.Double).Value = carrierJump.StarPos[0];
+                            mysqlCmd.Parameters.Add("@StarPosY", MySqlDbType.Double).Value = carrierJump.StarPos[1];
+                            mysqlCmd.Parameters.Add("@StarPosZ", MySqlDbType.Double).Value = carrierJump.StarPos[2];
+                            MySqlInsert(mysqlCmd);
+                        }
+                    }
+                    //локальная база
+                    sqliteCmd.CommandText = @"SELECT COUNT(*)
+                                                 FROM Systems
+                                                 WHERE SysAddr = @SysAddr";
+                    sqliteCmd.Parameters.Clear();
+                    sqliteCmd.Parameters.Add("@SysAddr", DbType.UInt64).Value = carrierJump.SystemAddress;
+
+                    if (SqliteCount(sqliteCmd) == 0)
+                    {
+                        //если не найден добавляем
+                        sqliteCmd.CommandText = @"INSERT INTO Systems (SysAddr, SystemName, StarPosX, StarPosY, StarPosZ)
+                                                    VALUES (@SysAddr, @SystemName, @StarPosX, @StarPosY, @StarPosZ)";
+                        sqliteCmd.Parameters.Clear();
+                        sqliteCmd.Parameters.Add("@SysAddr", DbType.UInt64).Value = carrierJump.SystemAddress;
+                        sqliteCmd.Parameters.Add("@SystemName", DbType.String).Value = carrierJump.StarSystem;
+                        sqliteCmd.Parameters.Add("@StarPosX", DbType.Double).Value = carrierJump.StarPos[0];
+                        sqliteCmd.Parameters.Add("@StarPosY", DbType.Double).Value = carrierJump.StarPos[1];
+                        sqliteCmd.Parameters.Add("@StarPosZ", DbType.Double).Value = carrierJump.StarPos[2];
+                        SqliteInsert(sqliteCmd);
+                        //доп. данные (хранятся только локально)
+                        sqliteCmd.CommandText = @"INSERT INTO SystemsLocal (SysAddr, LastVisit, Comment, HasImg)
+                                                    VALUES (@SysAddr, @LastVisit, @Comment, @HasImg)";
+                        sqliteCmd.Parameters.Clear();
+                        sqliteCmd.Parameters.Add("@SysAddr", DbType.UInt64).Value = carrierJump.SystemAddress;
+                        sqliteCmd.Parameters.Add("@LastVisit", DbType.String).Value = carrierJump.timestamp.ToString("d");
+                        sqliteCmd.Parameters.Add("@Comment", DbType.String).Value = "";
+                        sqliteCmd.Parameters.Add("@HasImg", DbType.Int32).Value = 0;
+                        SqliteInsert(sqliteCmd);
+                    }
+                    else
+                    {
+                        sqliteCmd.CommandText = @"UPDATE SystemsLocal
+                                                  SET LastVisit = @LastVisit
+                                                  WHERE SysAddr = @SysAddr";
+                        sqliteCmd.Parameters.Clear();
+                        sqliteCmd.Parameters.Add("@SysAddr", DbType.UInt64).Value = carrierJump.SystemAddress;
+                        sqliteCmd.Parameters.Add("@LastVisit", DbType.String).Value = carrierJump.timestamp.ToString("d");
+                        SqliteUpdate(sqliteCmd);
+                    }
+                    //устанавливаем систему как текущую
+                    currX = Convert.ToDouble(carrierJump.StarPos[0]);
+                    currY = Convert.ToDouble(carrierJump.StarPos[1]);
+                    currZ = Convert.ToDouble(carrierJump.StarPos[2]);
+                    lblCurrentSystem.Text = carrierJump.StarSystem;
+                    //последняя загруженная система
+                    Properties.Settings.Default.LastSystemAddress = carrierJump.SystemAddress;
+                    Properties.Settings.Default.LastSystemName = carrierJump.StarSystem;
+                    Properties.Settings.Default.Save();
+                    //текущая система
+                    sqliteCmd.CommandText = @"UPDATE CurrentCoordinates
+                            SET System = @System, X = @X, Y = @Y, Z = @Z
+                            WHERE rowid = @rowid";
+                    sqliteCmd.Parameters.Clear();
+                    sqliteCmd.Parameters.Add("@System", DbType.String).Value = carrierJump.StarSystem;
+                    sqliteCmd.Parameters.Add("@X", DbType.Double).Value = carrierJump.StarPos[0];
+                    sqliteCmd.Parameters.Add("@Y", DbType.Double).Value = carrierJump.StarPos[1];
+                    sqliteCmd.Parameters.Add("@Z", DbType.Double).Value = carrierJump.StarPos[2];
+                    sqliteCmd.Parameters.Add("@rowid", DbType.Int32).Value = 1;
+                    SqliteUpdate(sqliteCmd);
+                }
+
                 //"event":"Scan"
                 if (line.IndexOf("\"event\":\"Scan\"") >= 0)
                 {
@@ -1477,12 +1570,36 @@ namespace ED_Systems
                         mysqlCmd.Parameters.Add("@SysAddr", MySqlDbType.UInt64).Value = saaSignals.SystemAddress;
                         mysqlCmd.Parameters.Add("@PlanetID", MySqlDbType.UInt64).Value = saaSignals.BodyID;
                         dt = MySqlSelect(mysqlCmd);
-                        planetName = dt.Rows[0]["PlanetName"].ToString();
-
+                        if (dt.Rows.Count == 0)
+                        {
+                            //по id не нашлось, может загружено из EDSM
+                            //поищем по названию
+                            planetName = saaSignals.BodyName;
+                            planetName = saaSignals.BodyName.Replace(systemName, "").Trim();
+                            if (planetName.EndsWith("Ring", System.StringComparison.OrdinalIgnoreCase))
+                            {
+                                planetName = planetName.Substring(0, planetName.Length - 6).Trim();
+                            }
+                            //имя опредилили, ищем
+                            mysqlCmd.CommandText = @"SELECT PlanetID
+                                                 FROM Planets
+                                                 WHERE SysAddr = @SysAddr AND PlanetName = @PlanetName";
+                            mysqlCmd.Parameters.Clear();
+                            mysqlCmd.Parameters.Add("@SysAddr", MySqlDbType.UInt64).Value = saaSignals.SystemAddress;
+                            mysqlCmd.Parameters.Add("@PlanetName", MySqlDbType.String).Value = planetName;
+                            dt = MySqlSelect(mysqlCmd);
+                            if (dt.Rows.Count == 0) continue; //ничего не нашли
+                            //id из EDSM, меняем
+                            saaSignals.BodyID = Convert.ToUInt64(dt.Rows[0]["PlanetID"]);
+                        }
+                        else
+                        {
+                            planetName = dt.Rows[0]["PlanetName"].ToString();
+                        }
 
                         //название планеты + название кольца
                         ringName = saaSignals.BodyName.Replace(systemName, "").Trim();
-                        //название кольца полное
+                        //название кольца
                         ringName = ringName.Replace(planetName, "").Trim();
                     }
                     else
@@ -1502,17 +1619,43 @@ namespace ED_Systems
                         sqliteCmd.Parameters.Add("@SysAddr", DbType.UInt64).Value = saaSignals.SystemAddress;
                         sqliteCmd.Parameters.Add("@PlanetID", DbType.UInt64).Value = saaSignals.BodyID;
                         dt = SqliteSelect(sqliteCmd);
-                        planetName = dt.Rows[0]["PlanetName"].ToString();
+                        if (dt.Rows.Count == 0)
+                        {
+                            //по id не нашлось, может загружено из EDSM
+                            //поищем по названию
+                            planetName = saaSignals.BodyName;
+                            planetName = saaSignals.BodyName.Replace(systemName, "").Trim();
+                            if (planetName.EndsWith("Ring", System.StringComparison.OrdinalIgnoreCase))
+                            {
+                                planetName = planetName.Substring(0, planetName.Length - 6).Trim();
+                            }
+                            //имя опредилили, ищем
+                            sqliteCmd.CommandText = @"SELECT PlanetID
+                                                 FROM Planets
+                                                 WHERE SysAddr = @SysAddr AND PlanetName = @PlanetName";
+                            sqliteCmd.Parameters.Clear();
+                            sqliteCmd.Parameters.Add("@SysAddr", DbType.UInt64).Value = saaSignals.SystemAddress;
+                            sqliteCmd.Parameters.Add("@PlanetName", DbType.String).Value = planetName;
+                            dt = SqliteSelect(sqliteCmd);
+                            if (dt.Rows.Count == 0) continue; //ничего не нашли
+                            //id из EDSM, меняем
+                            saaSignals.BodyID = Convert.ToUInt64(dt.Rows[0]["PlanetID"]);
+                        }
+                        else
+                        {
+                            planetName = dt.Rows[0]["PlanetName"].ToString();
+                        }
 
                         //название планеты + название кольца
                         ringName = saaSignals.BodyName.Replace(systemName, "").Trim();
-                        //название кольца полное
+                        //название кольца
                         ringName = ringName.Replace(planetName, "").Trim();
                     }
                     //сигналы могут измениться
                     //нужно проверить, что уже записанные актуальны
                     //удаленная база
-                    if (!useLocalBase)
+                    /* может некорректно работать
+                    if (!useLocalBase && ringName != "")
                     {
                         mysqlCmd.CommandText = @"SELECT Type
                                                 FROM Signals
@@ -1546,68 +1689,76 @@ namespace ED_Systems
                         }
                     }
                     //локальная база
-                    sqliteCmd.CommandText = @"SELECT Type
+                    if (ringName != "")
+                    {
+                        sqliteCmd.CommandText = @"SELECT Type
                                                 FROM Signals
                                                 WHERE SysAddr = @SysAddr  AND 
                                                       PlanetID = @PlanetID AND
                                                       RingName = @RingName";
-                    sqliteCmd.Parameters.Clear();
-                    sqliteCmd.Parameters.Add("@SysAddr", DbType.Int64).Value = saaSignals.SystemAddress;
-                    sqliteCmd.Parameters.Add("@PlanetID", DbType.UInt64).Value = saaSignals.BodyID;
-                    sqliteCmd.Parameters.Add("@RingName", DbType.String).Value = ringName;
-                    dt = SqliteSelect(sqliteCmd);
-                    foreach (DataRow row in dt.Rows)
-                    {
-                        if (!saaSignals.Signals.Exists(item => item.Type == row["Type"].ToString()))
+                        sqliteCmd.Parameters.Clear();
+                        sqliteCmd.Parameters.Add("@SysAddr", DbType.Int64).Value = saaSignals.SystemAddress;
+                        sqliteCmd.Parameters.Add("@PlanetID", DbType.UInt64).Value = saaSignals.BodyID;
+                        sqliteCmd.Parameters.Add("@RingName", DbType.String).Value = ringName;
+                        dt = SqliteSelect(sqliteCmd);
+                        foreach (DataRow row in dt.Rows)
                         {
-                            //больше нет такого, удаляем из базы
-                            sqliteCmd.CommandText = @"DELETE
+                            if (!saaSignals.Signals.Exists(item => item.Type == row["Type"].ToString()))
+                            {
+                                //больше нет такого, удаляем из базы
+                                sqliteCmd.CommandText = @"DELETE
                                                         FROM Signals
                                                         WHERE SysAddr = @SysAddr  AND 
                                                               PlanetID = @PlanetID AND
                                                               RingName = @RingName AND
                                                               Type = @Type";
-                            sqliteCmd.Parameters.Clear();
-                            sqliteCmd.Parameters.Add("@SysAddr", DbType.Int64).Value = saaSignals.SystemAddress;
-                            sqliteCmd.Parameters.Add("@PlanetID", DbType.Int64).Value = saaSignals.BodyID;
-                            sqliteCmd.Parameters.Add("@RingName", DbType.String).Value = ringName;
-                            sqliteCmd.Parameters.Add("@Type", DbType.String).Value = row["Type"].ToString();
+                                sqliteCmd.Parameters.Clear();
+                                sqliteCmd.Parameters.Add("@SysAddr", DbType.Int64).Value = saaSignals.SystemAddress;
+                                sqliteCmd.Parameters.Add("@PlanetID", DbType.Int64).Value = saaSignals.BodyID;
+                                sqliteCmd.Parameters.Add("@RingName", DbType.String).Value = ringName;
+                                sqliteCmd.Parameters.Add("@Type", DbType.String).Value = row["Type"].ToString();
 
-                            SqliteDelete(sqliteCmd);
+                                SqliteDelete(sqliteCmd);
 
-                            sqliteCmd.CommandText = @"DELETE
+                                sqliteCmd.CommandText = @"DELETE
                                                         FROM SignalsLocal
                                                         WHERE SysAddr = @SysAddr  AND 
                                                               PlanetID = @PlanetID AND
                                                               RingName = @RingName AND
                                                               Type = @Type";
-                            sqliteCmd.Parameters.Clear();
-                            sqliteCmd.Parameters.Add("@SysAddr", DbType.Int64).Value = saaSignals.SystemAddress;
-                            sqliteCmd.Parameters.Add("@PlanetID", DbType.Int64).Value = saaSignals.BodyID;
-                            sqliteCmd.Parameters.Add("@RingName", DbType.String).Value = ringName;
-                            sqliteCmd.Parameters.Add("@Type", DbType.String).Value = row["Type"].ToString();
+                                sqliteCmd.Parameters.Clear();
+                                sqliteCmd.Parameters.Add("@SysAddr", DbType.Int64).Value = saaSignals.SystemAddress;
+                                sqliteCmd.Parameters.Add("@PlanetID", DbType.Int64).Value = saaSignals.BodyID;
+                                sqliteCmd.Parameters.Add("@RingName", DbType.String).Value = ringName;
+                                sqliteCmd.Parameters.Add("@Type", DbType.String).Value = row["Type"].ToString();
 
-                            SqliteDelete(sqliteCmd);
+                                SqliteDelete(sqliteCmd);
 
-                            sqliteCmd.CommandText = @"DELETE
+                                sqliteCmd.CommandText = @"DELETE
                                                         FROM SignalsImg
                                                         WHERE SysAddr = @SysAddr  AND 
                                                               PlanetID = @PlanetID AND
                                                               RingName = @RingName AND
                                                               Type = @Type";
-                            sqliteCmd.Parameters.Clear();
-                            sqliteCmd.Parameters.Add("@SysAddr", DbType.Int64).Value = saaSignals.SystemAddress;
-                            sqliteCmd.Parameters.Add("@PlanetID", DbType.Int64).Value = saaSignals.BodyID;
-                            sqliteCmd.Parameters.Add("@RingName", DbType.String).Value = ringName;
-                            sqliteCmd.Parameters.Add("@Type", DbType.String).Value = row["Type"].ToString();
+                                sqliteCmd.Parameters.Clear();
+                                sqliteCmd.Parameters.Add("@SysAddr", DbType.Int64).Value = saaSignals.SystemAddress;
+                                sqliteCmd.Parameters.Add("@PlanetID", DbType.Int64).Value = saaSignals.BodyID;
+                                sqliteCmd.Parameters.Add("@RingName", DbType.String).Value = ringName;
+                                sqliteCmd.Parameters.Add("@Type", DbType.String).Value = row["Type"].ToString();
 
-                            SqliteDelete(sqliteCmd);
+                                SqliteDelete(sqliteCmd);
+                            }
                         }
-                    }
+                    }*/
                     //добавляем отсутствующие
                     foreach (Signal elem in saaSignals.Signals)
                     {
-                        if(elem.Type == "$SAA_SignalType_Biological;" || elem.Type == "$SAA_SignalType_Geological;")
+                        if(elem.Type == "$SAA_SignalType_Biological;" ||
+                            elem.Type == "$SAA_SignalType_Geological;" ||
+                            elem.Type == "$SAA_SignalType_Other;" ||
+                            elem.Type == "$SAA_SignalType_Thargoid;" ||
+                            elem.Type == "$SAA_SignalType_Guardian;" ||
+                            elem.Type == "$SAA_SignalType_Human;")
                         {
                             //это сигналы с поверхности планеты
                             //добавляем в таблицу планет
@@ -1661,6 +1812,110 @@ namespace ED_Systems
                                 sqliteCmd.Parameters.Add("@SysAddr", DbType.Int64).Value = saaSignals.SystemAddress;
                                 sqliteCmd.Parameters.Add("@PlanetID", DbType.Int64).Value = saaSignals.BodyID;
                                 sqliteCmd.Parameters.Add("@Geological", DbType.Int32).Value = elem.Count;
+                                SqliteUpdate(sqliteCmd);
+                            }
+                            if (elem.Type == "$SAA_SignalType_Guardian;")
+                            {
+                                //удаленная база
+                                if (!useLocalBase)
+                                {
+                                    mysqlCmd.CommandText = @"UPDATE Planets
+                                                            SET Guardian = @Guardian
+                                                            WHERE SysAddr = @SysAddr AND
+                                                                  PlanetID = @PlanetID";
+                                    mysqlCmd.Parameters.Clear();
+                                    mysqlCmd.Parameters.Add("@SysAddr", MySqlDbType.UInt64).Value = saaSignals.SystemAddress;
+                                    mysqlCmd.Parameters.Add("@PlanetID", MySqlDbType.UInt64).Value = saaSignals.BodyID;
+                                    mysqlCmd.Parameters.Add("@Guardian", MySqlDbType.Int32).Value = elem.Count;
+                                    MySqlUpdate(mysqlCmd);
+                                }
+                                //локальная база
+                                sqliteCmd.CommandText = @"UPDATE Planets
+                                                            SET Guardian = @Guardian
+                                                            WHERE SysAddr = @SysAddr AND
+                                                                  PlanetID = @PlanetID";
+                                sqliteCmd.Parameters.Clear();
+                                sqliteCmd.Parameters.Add("@SysAddr", DbType.Int64).Value = saaSignals.SystemAddress;
+                                sqliteCmd.Parameters.Add("@PlanetID", DbType.Int64).Value = saaSignals.BodyID;
+                                sqliteCmd.Parameters.Add("@Guardian", DbType.Int32).Value = elem.Count;
+                                SqliteUpdate(sqliteCmd);
+                            }
+                            if (elem.Type == "$SAA_SignalType_Human;")
+                            {
+                                //удаленная база
+                                if (!useLocalBase)
+                                {
+                                    mysqlCmd.CommandText = @"UPDATE Planets
+                                                            SET Human = @Human
+                                                            WHERE SysAddr = @SysAddr AND
+                                                                  PlanetID = @PlanetID";
+                                    mysqlCmd.Parameters.Clear();
+                                    mysqlCmd.Parameters.Add("@SysAddr", MySqlDbType.UInt64).Value = saaSignals.SystemAddress;
+                                    mysqlCmd.Parameters.Add("@PlanetID", MySqlDbType.UInt64).Value = saaSignals.BodyID;
+                                    mysqlCmd.Parameters.Add("@Human", MySqlDbType.Int32).Value = elem.Count;
+                                    MySqlUpdate(mysqlCmd);
+                                }
+                                //локальная база
+                                sqliteCmd.CommandText = @"UPDATE Planets
+                                                            SET Human = @Human
+                                                            WHERE SysAddr = @SysAddr AND
+                                                                  PlanetID = @PlanetID";
+                                sqliteCmd.Parameters.Clear();
+                                sqliteCmd.Parameters.Add("@SysAddr", DbType.Int64).Value = saaSignals.SystemAddress;
+                                sqliteCmd.Parameters.Add("@PlanetID", DbType.Int64).Value = saaSignals.BodyID;
+                                sqliteCmd.Parameters.Add("@Human", DbType.Int32).Value = elem.Count;
+                                SqliteUpdate(sqliteCmd);
+                            }
+                            if (elem.Type == "$SAA_SignalType_Thargoid;")
+                            {
+                                //удаленная база
+                                if (!useLocalBase)
+                                {
+                                    mysqlCmd.CommandText = @"UPDATE Planets
+                                                            SET Thargoid = @Thargoid
+                                                            WHERE SysAddr = @SysAddr AND
+                                                                  PlanetID = @PlanetID";
+                                    mysqlCmd.Parameters.Clear();
+                                    mysqlCmd.Parameters.Add("@SysAddr", MySqlDbType.UInt64).Value = saaSignals.SystemAddress;
+                                    mysqlCmd.Parameters.Add("@PlanetID", MySqlDbType.UInt64).Value = saaSignals.BodyID;
+                                    mysqlCmd.Parameters.Add("@Thargoid", MySqlDbType.Int32).Value = elem.Count;
+                                    MySqlUpdate(mysqlCmd);
+                                }
+                                //локальная база
+                                sqliteCmd.CommandText = @"UPDATE Planets
+                                                            SET Thargoid = @Thargoid
+                                                            WHERE SysAddr = @SysAddr AND
+                                                                  PlanetID = @PlanetID";
+                                sqliteCmd.Parameters.Clear();
+                                sqliteCmd.Parameters.Add("@SysAddr", DbType.Int64).Value = saaSignals.SystemAddress;
+                                sqliteCmd.Parameters.Add("@PlanetID", DbType.Int64).Value = saaSignals.BodyID;
+                                sqliteCmd.Parameters.Add("@Thargoid", DbType.Int32).Value = elem.Count;
+                                SqliteUpdate(sqliteCmd);
+                            }
+                            if (elem.Type == "$SAA_SignalType_Other;")
+                            {
+                                //удаленная база
+                                if (!useLocalBase)
+                                {
+                                    mysqlCmd.CommandText = @"UPDATE Planets
+                                                            SET Other = @Other
+                                                            WHERE SysAddr = @SysAddr AND
+                                                                  PlanetID = @PlanetID";
+                                    mysqlCmd.Parameters.Clear();
+                                    mysqlCmd.Parameters.Add("@SysAddr", MySqlDbType.UInt64).Value = saaSignals.SystemAddress;
+                                    mysqlCmd.Parameters.Add("@PlanetID", MySqlDbType.UInt64).Value = saaSignals.BodyID;
+                                    mysqlCmd.Parameters.Add("@Other", MySqlDbType.Int32).Value = elem.Count;
+                                    MySqlUpdate(mysqlCmd);
+                                }
+                                //локальная база
+                                sqliteCmd.CommandText = @"UPDATE Planets
+                                                            SET Other = @Other
+                                                            WHERE SysAddr = @SysAddr AND
+                                                                  PlanetID = @PlanetID";
+                                sqliteCmd.Parameters.Clear();
+                                sqliteCmd.Parameters.Add("@SysAddr", DbType.Int64).Value = saaSignals.SystemAddress;
+                                sqliteCmd.Parameters.Add("@PlanetID", DbType.Int64).Value = saaSignals.BodyID;
+                                sqliteCmd.Parameters.Add("@Other", DbType.Int32).Value = elem.Count;
                                 SqliteUpdate(sqliteCmd);
                             }
                             continue;
@@ -1855,7 +2110,7 @@ namespace ED_Systems
             cbxFilter.Items.Add("");
             foreach (DataRow row in dt.Rows)
             {
-                cbxFilter.Items.Add(row["Type"].ToString() + " (" + row["Type_Localised"].ToString() + ")");
+                cbxFilter.Items.Add(row["Name"].ToString() + " (" + row["NameLocalised"].ToString() + ")");
             }
         }
         private void ShowEmptySystems()
@@ -2063,6 +2318,7 @@ namespace ED_Systems
             {
                 GetLogData(opf.FileName);
                 Properties.Settings.Default.LastLog = opf.SafeFileName;
+                Properties.Settings.Default.LastLogPath = opf.FileName;
                 Properties.Settings.Default.Save();
                 lblLogFolder.Text = "Log folder: " + Properties.Settings.Default.LogPath +
                     " [Last uploaded log: " + Properties.Settings.Default.LastLog + "]";
@@ -2209,7 +2465,7 @@ namespace ED_Systems
             ringsRowIndex = dgvRings.CurrentRow.Index;
             sysAddr = Convert.ToUInt64(dgvRings.CurrentRow.Cells["rgSystemAddress"].Value);
             planetID = Convert.ToUInt64(dgvRings.CurrentRow.Cells["rgPlanetID"].Value);
-            ringName = dgvRings.CurrentRow.Cells["rgName"].Value.ToString();
+            ringName = dgvRings.CurrentRow.Cells["rgRingName"].Value.ToString();
             if (sysAddr == 0 || planetID == 0 || ringName == "") return;
             ConnectMySQL();
             LoadSignals(sysAddr, planetID, ringName);
@@ -2392,9 +2648,9 @@ namespace ED_Systems
             currZ = Convert.ToDouble(dgvSystems.CurrentRow.Cells["sysStarPosZ"].Value);
 
             sqliteCmd.CommandText = @"UPDATE CurrentCoordinates
-                                    SET System = @System
-                                        X = @X
-                                        Y = @Y
+                                    SET System = @System,
+                                        X = @X,
+                                        Y = @Y,
                                         Z = @Z
                                     WHERE rowid = @rowid";
             sqliteCmd.Parameters.Clear();
@@ -2536,6 +2792,12 @@ namespace ED_Systems
             Properties.Settings.Default.MaxDistanse = Convert.ToDouble(setDist.maxDist);
             Properties.Settings.Default.Save();
             ApplyFilter();
+        }
+
+        private void lblLogFolder_Click(object sender, EventArgs e)
+        {
+            if (Properties.Settings.Default.LastLogPath == "") return;
+            GetLogData(Properties.Settings.Default.LastLogPath);
         }
     }
 }

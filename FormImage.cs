@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace ED_Systems
     public partial class FormImage : Form
     {
         public List<string> imgFiles;
-        public List<string> brokenPaths;
+        public List<string> brokenPaths = new List<string>();
         private Image img;
         int CurrentImgIndex;
         public FormImage()
@@ -50,7 +51,7 @@ namespace ED_Systems
             catch (OutOfMemoryException ex)
             {
                 img = Image.FromFile(@"images\notfound.png");
-                if(brokenPaths.Find((x) => x == path) == "")
+                if(brokenPaths.Count == 0 || brokenPaths.Find((x) => x == path) == "")
                 {
                     brokenPaths.Add(path);
                 }
@@ -97,6 +98,43 @@ namespace ED_Systems
             GetImage(imgFiles[CurrentImgIndex]);
             pbxImg.Image = img;
             ChangeSize();
+        }
+
+        private void deleteImageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Delete image?",
+                                                    "Delete",
+                                                    MessageBoxButtons.YesNo,
+                                                    MessageBoxIcon.Question,
+                                                    MessageBoxDefaultButton.Button2,
+                                                    MessageBoxOptions.DefaultDesktopOnly);
+            if(result == DialogResult.Yes)
+            {
+                string path = imgFiles[CurrentImgIndex];
+                if (brokenPaths.Count == 0 || brokenPaths.Find((x) => x == path) == "")
+                {
+                    try
+                    {
+                        img.Dispose();
+                        pbxImg.Image.Dispose();
+                        img = Image.FromFile(@"images\notfound.png");
+                        pbxImg.Image = img;
+                        File.Delete(path);
+                        brokenPaths.Add(path);
+                        imgFiles.RemoveAt(CurrentImgIndex);     //[CurrentImgIndex] = @"images\notfound.png";
+                    }
+                    catch(IOException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
+        }
+
+        private void FormImage_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            img.Dispose();
+            pbxImg.Image.Dispose();
         }
     }
 }

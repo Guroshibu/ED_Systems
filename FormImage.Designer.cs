@@ -37,6 +37,8 @@
             this.pbxImg = new System.Windows.Forms.PictureBox();
             this.cmsImg = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.fullSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.deleteImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.msMain.SuspendLayout();
             this.pnlImage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxImg)).BeginInit();
@@ -98,17 +100,31 @@
             // cmsImg
             // 
             this.cmsImg.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fullSizeToolStripMenuItem});
+            this.fullSizeToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.deleteImageToolStripMenuItem});
             this.cmsImg.Name = "cmsImg";
-            this.cmsImg.Size = new System.Drawing.Size(116, 26);
+            this.cmsImg.Size = new System.Drawing.Size(144, 54);
             // 
             // fullSizeToolStripMenuItem
             // 
             this.fullSizeToolStripMenuItem.CheckOnClick = true;
             this.fullSizeToolStripMenuItem.Name = "fullSizeToolStripMenuItem";
-            this.fullSizeToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.fullSizeToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.fullSizeToolStripMenuItem.Text = "Full size";
             this.fullSizeToolStripMenuItem.CheckedChanged += new System.EventHandler(this.fullSizeToolStripMenuItem_CheckedChanged);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(140, 6);
+            // 
+            // deleteImageToolStripMenuItem
+            // 
+            this.deleteImageToolStripMenuItem.Name = "deleteImageToolStripMenuItem";
+            this.deleteImageToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.deleteImageToolStripMenuItem.Text = "Delete image";
+            this.deleteImageToolStripMenuItem.Click += new System.EventHandler(this.deleteImageToolStripMenuItem_Click);
             // 
             // FormImage
             // 
@@ -122,6 +138,7 @@
             this.Name = "FormImage";
             this.Text = "ED Images";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormImage_FormClosed);
             this.Load += new System.EventHandler(this.FormImage_Load);
             this.msMain.ResumeLayout(false);
             this.msMain.PerformLayout();
@@ -142,5 +159,7 @@
         private System.Windows.Forms.PictureBox pbxImg;
         private System.Windows.Forms.ContextMenuStrip cmsImg;
         private System.Windows.Forms.ToolStripMenuItem fullSizeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem deleteImageToolStripMenuItem;
     }
 }

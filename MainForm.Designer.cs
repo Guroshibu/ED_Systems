@@ -55,6 +55,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.useLocalBaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,11 +70,15 @@
             this.deleteEmptySystemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.universalCartographicPricesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.donateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.lblLogFolder = new System.Windows.Forms.Label();
             this.lblCurrentCoordinates = new System.Windows.Forms.Label();
             this.lblCurrentSystem = new System.Windows.Forms.Label();
             this.pnlSystemInfo = new System.Windows.Forms.Panel();
             this.spcSystemInfo = new System.Windows.Forms.SplitContainer();
+            this.grbSystems = new System.Windows.Forms.GroupBox();
+            this.rbComment = new System.Windows.Forms.RadioButton();
+            this.rbSystems = new System.Windows.Forms.RadioButton();
             this.tbxSystemFilter = new System.Windows.Forms.TextBox();
             this.lblSystems = new System.Windows.Forms.Label();
             this.dgvSystems = new System.Windows.Forms.DataGridView();
@@ -108,6 +117,9 @@
             this.plThargoid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.plOther = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.plHasImg = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmsPlanets = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addImageToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.showImagesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dgvRAW = new System.Windows.Forms.DataGridView();
             this.rawSystemAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -133,18 +145,15 @@
             this.sigCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sigComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sigHasImg = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmsSignals = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addImageToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.showImagesToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.cbxFilter = new System.Windows.Forms.ComboBox();
             this.lblFilter = new System.Windows.Forms.Label();
             this.prbUpload = new System.Windows.Forms.ProgressBar();
             this.grbFilter = new System.Windows.Forms.GroupBox();
             this.rbSignals = new System.Windows.Forms.RadioButton();
             this.rbRaw = new System.Windows.Forms.RadioButton();
-            this.cmsPlanets = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.addImageToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.showImagesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsSignals = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.addImageToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.showImagesToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.tltLastLog = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip.SuspendLayout();
             this.pnlSystemInfo.SuspendLayout();
@@ -152,6 +161,7 @@
             this.spcSystemInfo.Panel1.SuspendLayout();
             this.spcSystemInfo.Panel2.SuspendLayout();
             this.spcSystemInfo.SuspendLayout();
+            this.grbSystems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSystems)).BeginInit();
             this.cmsSystemsCopy.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spcPlanetInfo)).BeginInit();
@@ -159,6 +169,7 @@
             this.spcPlanetInfo.Panel2.SuspendLayout();
             this.spcPlanetInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlanets)).BeginInit();
+            this.cmsPlanets.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -170,9 +181,8 @@
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRings)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSignals)).BeginInit();
-            this.grbFilter.SuspendLayout();
-            this.cmsPlanets.SuspendLayout();
             this.cmsSignals.SuspendLayout();
+            this.grbFilter.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -186,7 +196,8 @@
             this.showEmptySystemsToolStripMenuItem,
             this.deleteEmptySystemsToolStripMenuItem,
             this.universalCartographicPricesToolStripMenuItem,
-            this.donateToolStripMenuItem});
+            this.donateToolStripMenuItem,
+            this.toolStripMenuHelp});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(984, 24);
@@ -250,6 +261,13 @@
             this.donateToolStripMenuItem.Text = "Donate";
             this.donateToolStripMenuItem.Click += new System.EventHandler(this.donateToolStripMenuItem_Click);
             // 
+            // toolStripMenuHelp
+            // 
+            this.toolStripMenuHelp.Name = "toolStripMenuHelp";
+            this.toolStripMenuHelp.Size = new System.Drawing.Size(44, 20);
+            this.toolStripMenuHelp.Text = "Help";
+            this.toolStripMenuHelp.Click += new System.EventHandler(this.toolStripMenuHelp_Click);
+            // 
             // lblLogFolder
             // 
             this.lblLogFolder.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -302,7 +320,7 @@
             // 
             // spcSystemInfo.Panel1
             // 
-            this.spcSystemInfo.Panel1.Controls.Add(this.tbxSystemFilter);
+            this.spcSystemInfo.Panel1.Controls.Add(this.grbSystems);
             this.spcSystemInfo.Panel1.Controls.Add(this.lblSystems);
             this.spcSystemInfo.Panel1.Controls.Add(this.dgvSystems);
             // 
@@ -314,12 +332,49 @@
             this.spcSystemInfo.SplitterWidth = 5;
             this.spcSystemInfo.TabIndex = 4;
             // 
+            // grbSystems
+            // 
+            this.grbSystems.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grbSystems.Controls.Add(this.rbComment);
+            this.grbSystems.Controls.Add(this.rbSystems);
+            this.grbSystems.Controls.Add(this.tbxSystemFilter);
+            this.grbSystems.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.grbSystems.Location = new System.Drawing.Point(1, 25);
+            this.grbSystems.Name = "grbSystems";
+            this.grbSystems.Size = new System.Drawing.Size(295, 64);
+            this.grbSystems.TabIndex = 3;
+            this.grbSystems.TabStop = false;
+            this.grbSystems.Text = "Filter";
+            // 
+            // rbComment
+            // 
+            this.rbComment.AutoSize = true;
+            this.rbComment.Location = new System.Drawing.Point(120, 16);
+            this.rbComment.Name = "rbComment";
+            this.rbComment.Size = new System.Drawing.Size(83, 20);
+            this.rbComment.TabIndex = 4;
+            this.rbComment.Text = "Comment";
+            this.rbComment.UseVisualStyleBackColor = true;
+            // 
+            // rbSystems
+            // 
+            this.rbSystems.AutoSize = true;
+            this.rbSystems.Checked = true;
+            this.rbSystems.Location = new System.Drawing.Point(6, 16);
+            this.rbSystems.Name = "rbSystems";
+            this.rbSystems.Size = new System.Drawing.Size(108, 20);
+            this.rbSystems.TabIndex = 3;
+            this.rbSystems.TabStop = true;
+            this.rbSystems.Text = "System name";
+            this.rbSystems.UseVisualStyleBackColor = true;
+            // 
             // tbxSystemFilter
             // 
             this.tbxSystemFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbxSystemFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbxSystemFilter.Location = new System.Drawing.Point(3, 25);
+            this.tbxSystemFilter.Location = new System.Drawing.Point(2, 42);
             this.tbxSystemFilter.Name = "tbxSystemFilter";
             this.tbxSystemFilter.Size = new System.Drawing.Size(293, 22);
             this.tbxSystemFilter.TabIndex = 2;
@@ -342,6 +397,14 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvSystems.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvSystems.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvSystems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSystems.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.sysSystemAddress,
@@ -353,9 +416,9 @@
             this.sysDistance,
             this.sysHasImg,
             this.sysComment});
-            this.dgvSystems.Location = new System.Drawing.Point(0, 53);
+            this.dgvSystems.Location = new System.Drawing.Point(0, 95);
             this.dgvSystems.Name = "dgvSystems";
-            this.dgvSystems.Size = new System.Drawing.Size(296, 405);
+            this.dgvSystems.Size = new System.Drawing.Size(296, 363);
             this.dgvSystems.TabIndex = 1;
             this.dgvSystems.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSystems_CellEndEdit);
             this.dgvSystems.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSystems_CellEnter);
@@ -382,8 +445,8 @@
             this.sysStarSystem.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.sysStarSystem.ContextMenuStrip = this.cmsSystemsCopy;
             this.sysStarSystem.DataPropertyName = "SystemName";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.sysStarSystem.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.sysStarSystem.DefaultCellStyle = dataGridViewCellStyle2;
             this.sysStarSystem.HeaderText = "Star system";
             this.sysStarSystem.Name = "sysStarSystem";
             this.sysStarSystem.ReadOnly = true;
@@ -480,10 +543,10 @@
             // 
             this.sysDistance.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.sysDistance.DataPropertyName = "Distance";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.Format = "N2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.sysDistance.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.Format = "N2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.sysDistance.DefaultCellStyle = dataGridViewCellStyle3;
             this.sysDistance.HeaderText = "Distance (ly)";
             this.sysDistance.Name = "sysDistance";
             this.sysDistance.ReadOnly = true;
@@ -493,8 +556,8 @@
             // 
             this.sysHasImg.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.sysHasImg.DataPropertyName = "HasImg";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.sysHasImg.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.sysHasImg.DefaultCellStyle = dataGridViewCellStyle4;
             this.sysHasImg.HeaderText = "Img";
             this.sysHasImg.Name = "sysHasImg";
             this.sysHasImg.ReadOnly = true;
@@ -504,11 +567,13 @@
             // sysComment
             // 
             this.sysComment.DataPropertyName = "Comment";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.sysComment.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.sysComment.DefaultCellStyle = dataGridViewCellStyle5;
             this.sysComment.HeaderText = "Comment";
+            this.sysComment.MinimumWidth = 50;
             this.sysComment.Name = "sysComment";
+            this.sysComment.Width = 300;
             // 
             // spcPlanetInfo
             // 
@@ -548,6 +613,14 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvPlanets.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPlanets.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvPlanets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPlanets.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.plSystemAddress,
@@ -565,6 +638,7 @@
             this.plThargoid,
             this.plOther,
             this.plHasImg});
+            this.dgvPlanets.ContextMenuStrip = this.cmsPlanets;
             this.dgvPlanets.Location = new System.Drawing.Point(0, 25);
             this.dgvPlanets.Name = "dgvPlanets";
             this.dgvPlanets.Size = new System.Drawing.Size(646, 194);
@@ -591,8 +665,8 @@
             // 
             this.plPlanetName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.plPlanetName.DataPropertyName = "PlanetName";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.plPlanetName.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.plPlanetName.DefaultCellStyle = dataGridViewCellStyle7;
             this.plPlanetName.HeaderText = "Planet";
             this.plPlanetName.Name = "plPlanetName";
             this.plPlanetName.ReadOnly = true;
@@ -602,10 +676,10 @@
             // 
             this.plDistance.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.plDistance.DataPropertyName = "Distance";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.Format = "N0";
-            dataGridViewCellStyle6.NullValue = null;
-            this.plDistance.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.Format = "N0";
+            dataGridViewCellStyle8.NullValue = null;
+            this.plDistance.DefaultCellStyle = dataGridViewCellStyle8;
             this.plDistance.HeaderText = "Distance (ls)";
             this.plDistance.Name = "plDistance";
             this.plDistance.ReadOnly = true;
@@ -615,8 +689,8 @@
             // 
             this.plPlanetClass.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.plPlanetClass.DataPropertyName = "Class";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.plPlanetClass.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.plPlanetClass.DefaultCellStyle = dataGridViewCellStyle9;
             this.plPlanetClass.HeaderText = "Planet class";
             this.plPlanetClass.Name = "plPlanetClass";
             this.plPlanetClass.ReadOnly = true;
@@ -626,8 +700,8 @@
             // 
             this.plVolcanism.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.plVolcanism.DataPropertyName = "Volcanism";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.plVolcanism.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.plVolcanism.DefaultCellStyle = dataGridViewCellStyle10;
             this.plVolcanism.HeaderText = "Volcanism";
             this.plVolcanism.Name = "plVolcanism";
             this.plVolcanism.ReadOnly = true;
@@ -647,8 +721,8 @@
             // plReserve
             // 
             this.plReserve.DataPropertyName = "Reserve";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.plReserve.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.plReserve.DefaultCellStyle = dataGridViewCellStyle11;
             this.plReserve.HeaderText = "Reserve";
             this.plReserve.Name = "plReserve";
             this.plReserve.ReadOnly = true;
@@ -657,8 +731,8 @@
             // 
             this.plBiological.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.plBiological.DataPropertyName = "Biological";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.plBiological.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.plBiological.DefaultCellStyle = dataGridViewCellStyle12;
             this.plBiological.HeaderText = "Bio";
             this.plBiological.Name = "plBiological";
             this.plBiological.ReadOnly = true;
@@ -668,8 +742,8 @@
             // 
             this.plGeological.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.plGeological.DataPropertyName = "Geological";
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.plGeological.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.plGeological.DefaultCellStyle = dataGridViewCellStyle13;
             this.plGeological.HeaderText = "Geo";
             this.plGeological.Name = "plGeological";
             this.plGeological.ReadOnly = true;
@@ -679,8 +753,8 @@
             // 
             this.plHuman.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.plHuman.DataPropertyName = "Human";
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.plHuman.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.plHuman.DefaultCellStyle = dataGridViewCellStyle14;
             this.plHuman.HeaderText = "Human";
             this.plHuman.Name = "plHuman";
             this.plHuman.ReadOnly = true;
@@ -690,8 +764,8 @@
             // 
             this.plGuardian.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.plGuardian.DataPropertyName = "Guardian";
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.plGuardian.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.plGuardian.DefaultCellStyle = dataGridViewCellStyle15;
             this.plGuardian.HeaderText = "Guardian";
             this.plGuardian.Name = "plGuardian";
             this.plGuardian.ReadOnly = true;
@@ -701,8 +775,8 @@
             // 
             this.plThargoid.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.plThargoid.DataPropertyName = "Thargoid";
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.plThargoid.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.plThargoid.DefaultCellStyle = dataGridViewCellStyle16;
             this.plThargoid.HeaderText = "Thargoid";
             this.plThargoid.Name = "plThargoid";
             this.plThargoid.ReadOnly = true;
@@ -712,8 +786,8 @@
             // 
             this.plOther.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.plOther.DataPropertyName = "Other";
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.plOther.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.plOther.DefaultCellStyle = dataGridViewCellStyle17;
             this.plOther.HeaderText = "Other";
             this.plOther.Name = "plOther";
             this.plOther.ReadOnly = true;
@@ -723,14 +797,36 @@
             // 
             this.plHasImg.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.plHasImg.DataPropertyName = "HasImg";
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.plHasImg.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.plHasImg.DefaultCellStyle = dataGridViewCellStyle18;
             this.plHasImg.HeaderText = "Img";
             this.plHasImg.Name = "plHasImg";
             this.plHasImg.ReadOnly = true;
             this.plHasImg.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.plHasImg.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.plHasImg.Width = 30;
+            // 
+            // cmsPlanets
+            // 
+            this.cmsPlanets.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addImageToolStripMenuItem1,
+            this.showImagesToolStripMenuItem1});
+            this.cmsPlanets.Name = "cmsPlanets";
+            this.cmsPlanets.Size = new System.Drawing.Size(145, 48);
+            // 
+            // addImageToolStripMenuItem1
+            // 
+            this.addImageToolStripMenuItem1.Name = "addImageToolStripMenuItem1";
+            this.addImageToolStripMenuItem1.Size = new System.Drawing.Size(144, 22);
+            this.addImageToolStripMenuItem1.Text = "Add image";
+            this.addImageToolStripMenuItem1.Click += new System.EventHandler(this.addImageToolStripMenuItem1_Click);
+            // 
+            // showImagesToolStripMenuItem1
+            // 
+            this.showImagesToolStripMenuItem1.Name = "showImagesToolStripMenuItem1";
+            this.showImagesToolStripMenuItem1.Size = new System.Drawing.Size(144, 22);
+            this.showImagesToolStripMenuItem1.Text = "Show images";
+            this.showImagesToolStripMenuItem1.Click += new System.EventHandler(this.showImagesToolStripMenuItem1_Click);
             // 
             // splitContainer1
             // 
@@ -757,6 +853,14 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvRAW.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvRAW.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle19;
             this.dgvRAW.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRAW.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.rawSystemAddress,
@@ -788,8 +892,8 @@
             // rawName
             // 
             this.rawName.DataPropertyName = "Name";
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.rawName.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.rawName.DefaultCellStyle = dataGridViewCellStyle20;
             this.rawName.HeaderText = "Name (en)";
             this.rawName.Name = "rawName";
             this.rawName.ReadOnly = true;
@@ -797,8 +901,8 @@
             // rawNameLocalised
             // 
             this.rawNameLocalised.DataPropertyName = "NameLocalised";
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.rawNameLocalised.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.rawNameLocalised.DefaultCellStyle = dataGridViewCellStyle21;
             this.rawNameLocalised.HeaderText = "Name (loc)";
             this.rawNameLocalised.Name = "rawNameLocalised";
             this.rawNameLocalised.ReadOnly = true;
@@ -806,10 +910,10 @@
             // rawPercent
             // 
             this.rawPercent.DataPropertyName = "Percent";
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle19.Format = "N1";
-            dataGridViewCellStyle19.NullValue = null;
-            this.rawPercent.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle22.Format = "N1";
+            dataGridViewCellStyle22.NullValue = null;
+            this.rawPercent.DefaultCellStyle = dataGridViewCellStyle22;
             this.rawPercent.HeaderText = "Percent";
             this.rawPercent.Name = "rawPercent";
             this.rawPercent.ReadOnly = true;
@@ -851,6 +955,14 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvRings.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle23.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvRings.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle23;
             this.dgvRings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRings.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.rgSystemAddress,
@@ -882,8 +994,8 @@
             // rgRingName
             // 
             this.rgRingName.DataPropertyName = "RingName";
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.rgRingName.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.rgRingName.DefaultCellStyle = dataGridViewCellStyle24;
             this.rgRingName.HeaderText = "Ring";
             this.rgRingName.Name = "rgRingName";
             this.rgRingName.ReadOnly = true;
@@ -891,8 +1003,8 @@
             // rgClass
             // 
             this.rgClass.DataPropertyName = "Class";
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.rgClass.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.rgClass.DefaultCellStyle = dataGridViewCellStyle25;
             this.rgClass.HeaderText = "Class";
             this.rgClass.Name = "rgClass";
             this.rgClass.ReadOnly = true;
@@ -925,6 +1037,14 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvSignals.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle26.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle26.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle26.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvSignals.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle26;
             this.dgvSignals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSignals.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.sigSystemAddress,
@@ -935,6 +1055,7 @@
             this.sigCount,
             this.sigComment,
             this.sigHasImg});
+            this.dgvSignals.ContextMenuStrip = this.cmsSignals;
             this.dgvSignals.Location = new System.Drawing.Point(0, 21);
             this.dgvSignals.Name = "dgvSignals";
             this.dgvSignals.Size = new System.Drawing.Size(212, 206);
@@ -968,8 +1089,8 @@
             // sigType
             // 
             this.sigType.DataPropertyName = "Type";
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.sigType.DefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.sigType.DefaultCellStyle = dataGridViewCellStyle27;
             this.sigType.HeaderText = "Type (en)";
             this.sigType.Name = "sigType";
             this.sigType.ReadOnly = true;
@@ -977,8 +1098,8 @@
             // sigTypeLocalised
             // 
             this.sigTypeLocalised.DataPropertyName = "NameLocalised";
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.sigTypeLocalised.DefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.sigTypeLocalised.DefaultCellStyle = dataGridViewCellStyle28;
             this.sigTypeLocalised.HeaderText = "Type (loc)";
             this.sigTypeLocalised.Name = "sigTypeLocalised";
             this.sigTypeLocalised.ReadOnly = true;
@@ -986,8 +1107,8 @@
             // sigCount
             // 
             this.sigCount.DataPropertyName = "Count";
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.sigCount.DefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.sigCount.DefaultCellStyle = dataGridViewCellStyle29;
             this.sigCount.HeaderText = "Count";
             this.sigCount.Name = "sigCount";
             this.sigCount.ReadOnly = true;
@@ -995,9 +1116,9 @@
             // sigComment
             // 
             this.sigComment.DataPropertyName = "Comment";
-            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.sigComment.DefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.sigComment.DefaultCellStyle = dataGridViewCellStyle30;
             this.sigComment.HeaderText = "Comment";
             this.sigComment.Name = "sigComment";
             // 
@@ -1005,14 +1126,36 @@
             // 
             this.sigHasImg.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.sigHasImg.DataPropertyName = "HasImg";
-            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.sigHasImg.DefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.sigHasImg.DefaultCellStyle = dataGridViewCellStyle31;
             this.sigHasImg.HeaderText = "Img";
             this.sigHasImg.Name = "sigHasImg";
             this.sigHasImg.ReadOnly = true;
             this.sigHasImg.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.sigHasImg.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.sigHasImg.Width = 30;
+            // 
+            // cmsSignals
+            // 
+            this.cmsSignals.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addImageToolStripMenuItem2,
+            this.showImagesToolStripMenuItem2});
+            this.cmsSignals.Name = "cmsSignals";
+            this.cmsSignals.Size = new System.Drawing.Size(181, 70);
+            // 
+            // addImageToolStripMenuItem2
+            // 
+            this.addImageToolStripMenuItem2.Name = "addImageToolStripMenuItem2";
+            this.addImageToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.addImageToolStripMenuItem2.Text = "Add image";
+            this.addImageToolStripMenuItem2.Click += new System.EventHandler(this.addImageToolStripMenuItem2_Click);
+            // 
+            // showImagesToolStripMenuItem2
+            // 
+            this.showImagesToolStripMenuItem2.Name = "showImagesToolStripMenuItem2";
+            this.showImagesToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.showImagesToolStripMenuItem2.Text = "Show images";
+            this.showImagesToolStripMenuItem2.Click += new System.EventHandler(this.showImagesToolStripMenuItem2_Click);
             // 
             // cbxFilter
             // 
@@ -1083,46 +1226,6 @@
             this.rbRaw.UseVisualStyleBackColor = true;
             this.rbRaw.CheckedChanged += new System.EventHandler(this.rbRaw_CheckedChanged);
             // 
-            // cmsPlanets
-            // 
-            this.cmsPlanets.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addImageToolStripMenuItem1,
-            this.showImagesToolStripMenuItem1});
-            this.cmsPlanets.Name = "cmsPlanets";
-            this.cmsPlanets.Size = new System.Drawing.Size(145, 48);
-            // 
-            // addImageToolStripMenuItem1
-            // 
-            this.addImageToolStripMenuItem1.Name = "addImageToolStripMenuItem1";
-            this.addImageToolStripMenuItem1.Size = new System.Drawing.Size(144, 22);
-            this.addImageToolStripMenuItem1.Text = "Add image";
-            // 
-            // showImagesToolStripMenuItem1
-            // 
-            this.showImagesToolStripMenuItem1.Name = "showImagesToolStripMenuItem1";
-            this.showImagesToolStripMenuItem1.Size = new System.Drawing.Size(144, 22);
-            this.showImagesToolStripMenuItem1.Text = "Show images";
-            // 
-            // cmsSignals
-            // 
-            this.cmsSignals.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addImageToolStripMenuItem2,
-            this.showImagesToolStripMenuItem2});
-            this.cmsSignals.Name = "cmsSignals";
-            this.cmsSignals.Size = new System.Drawing.Size(145, 48);
-            // 
-            // addImageToolStripMenuItem2
-            // 
-            this.addImageToolStripMenuItem2.Name = "addImageToolStripMenuItem2";
-            this.addImageToolStripMenuItem2.Size = new System.Drawing.Size(144, 22);
-            this.addImageToolStripMenuItem2.Text = "Add image";
-            // 
-            // showImagesToolStripMenuItem2
-            // 
-            this.showImagesToolStripMenuItem2.Name = "showImagesToolStripMenuItem2";
-            this.showImagesToolStripMenuItem2.Size = new System.Drawing.Size(144, 22);
-            this.showImagesToolStripMenuItem2.Text = "Show images";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1147,10 +1250,11 @@
             this.menuStrip.PerformLayout();
             this.pnlSystemInfo.ResumeLayout(false);
             this.spcSystemInfo.Panel1.ResumeLayout(false);
-            this.spcSystemInfo.Panel1.PerformLayout();
             this.spcSystemInfo.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.spcSystemInfo)).EndInit();
             this.spcSystemInfo.ResumeLayout(false);
+            this.grbSystems.ResumeLayout(false);
+            this.grbSystems.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSystems)).EndInit();
             this.cmsSystemsCopy.ResumeLayout(false);
             this.spcPlanetInfo.Panel1.ResumeLayout(false);
@@ -1158,6 +1262,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.spcPlanetInfo)).EndInit();
             this.spcPlanetInfo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlanets)).EndInit();
+            this.cmsPlanets.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -1169,10 +1274,9 @@
             this.splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRings)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSignals)).EndInit();
+            this.cmsSignals.ResumeLayout(false);
             this.grbFilter.ResumeLayout(false);
             this.grbFilter.PerformLayout();
-            this.cmsPlanets.ResumeLayout(false);
-            this.cmsSignals.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1228,15 +1332,6 @@
         private System.Windows.Forms.ToolStripMenuItem showImagesToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem donateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem setMaxDistanceToolStripMenuItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sysSystemAddress;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sysLastVisit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sysStarSystem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sysStarPosX;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sysStarPosY;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sysStarPosZ;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sysDistance;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sysHasImg;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sysComment;
         private System.Windows.Forms.DataGridViewTextBoxColumn rawSystemAddress;
         private System.Windows.Forms.DataGridViewTextBoxColumn rawPlanetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn rawName;
@@ -1270,6 +1365,19 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn sigComment;
         private System.Windows.Forms.DataGridViewTextBoxColumn sigHasImg;
         private System.Windows.Forms.ToolTip tltLastLog;
+        private System.Windows.Forms.GroupBox grbSystems;
+        private System.Windows.Forms.RadioButton rbComment;
+        private System.Windows.Forms.RadioButton rbSystems;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuHelp;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sysSystemAddress;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sysLastVisit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sysStarSystem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sysStarPosX;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sysStarPosY;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sysStarPosZ;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sysDistance;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sysHasImg;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sysComment;
     }
 }
 

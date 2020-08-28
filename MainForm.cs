@@ -829,12 +829,19 @@ namespace ED_Systems
 
             int linesCount;
 
-            string[] fileLines;
+            List<string> fileLines = new List<string>();
 
             if (!File.Exists(path)) return;
 
-            fileLines = System.IO.File.ReadAllLines(path);
-            linesCount = fileLines.Length;
+            FileInfo log = new FileInfo(path);
+            StreamReader stream = new StreamReader(log.Open(FileMode.Open, FileAccess.Read, FileShare.ReadWrite));
+            while (!stream.EndOfStream)
+            {
+                fileLines.Add(stream.ReadLine());
+            }
+            stream.Close();
+            log = null;
+            linesCount = fileLines.Count;
 
             prbUpload.Visible = true;
             prbUpload.Minimum = 1;
